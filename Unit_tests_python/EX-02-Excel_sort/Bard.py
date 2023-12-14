@@ -1,45 +1,32 @@
-from io import BytesIO
-
 import pandas as pd
-from openpyxl import load_workbook
 
+def excel_sort(file_path, col_index):
+  """
+  Sorts an Excel file's data based on a specified column in descending order.
 
-def excel_sort(file_path, column_index):
-    """
-    Sorts an Excel file in descending order based on a specified column and returns a new, unsaved xlsl file.
+  Args:
+    file_path: The path to the Excel file.
+    col_index: The index of the column to sort by (0-based indexing).
 
-    Args:
-        file_path (str): The path to the Excel file.
-        column_index (int): The index of the column to sort by (0-based).
+  Returns:
+    An in-memory Excel object containing the sorted data.
+  """
 
-    Returns:
-        bytes: The contents of the sorted xlsl file in memory.
+  # Read the Excel file into a Pandas DataFrame
+  data_frame = pd.read_excel(file_path)
 
-    Raises:
-        ValueError: If the provided file path is invalid.
-        IndexError: If the provided column index is out of bounds.
-    """
+  # Sort the data by the specified column in descending order
+  sorted_data = data_frame.sort_values(by=col_index, ascending=False)
 
-    # Read the Excel file into a pandas DataFrame
-    try:
-        with open(file_path, "rb") as f:
-            data = pd.read_excel(f)
-    except FileNotFoundError:
-        raise ValueError(f"File not found: {file_path}")
+  # Convert the sorted DataFrame back into an Excel object
+  excel_obj = pd.ExcelWriter('in_memory_file.xlsx', engine='openpyxl')
+  sorted_data.to_excel(excel_obj)
+  excel_obj.save()
+  excel_obj.close()
 
-    # Sort the DataFrame by the specified column in descending order
-    try:
-        sorted_data = data.sort_values(by=column_index, ascending=False)
-    except IndexError:
-        raise IndexError(f"Invalid column index: {column_index}")
+  # Load the in-memory Excel object
+  with pd.ExcelFile('in_memory_file.xlsx') as xlsx:
+    return xlsx.parse(xlsx.sheet_names[0])
 
-    # Create a new xlsl file in memory
-    output_file = BytesIO()
-    writer = pd.ExcelWriter(output_file, engine="openpyxl")
-
-    # Write the sorted DataFrame to the new xlsl file
-    sorted_data.to_excel(writer, sheet_name="Sorted Data")
-    writer.save()
-
-    # Return the contents of the new xlsl file in memory
-    return output_file.getvalue()
+  # (Optional) Delete the temporary in-memory file
+  os.remove('in_memory_file.xlsx')

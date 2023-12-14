@@ -1,27 +1,24 @@
 import pandas as pd
-from io import BytesIO
-from openpyxl import Workbook
 
 def excel_sort(file_path, column_index):
-    # Load the Excel file using pandas
-    df = pd.read_excel(file_path)
+    try:
+        # Read the Excel file into a DataFrame
+        df = pd.read_excel(file_path)
 
-    # Sort the DataFrame in descending order based on the specified column
-    df = df.sort_values(by=df.columns[column_index], ascending=False)
+        # Check if the column_index is valid
+        if column_index < 0 or column_index >= len(df.columns):
+            raise ValueError("Invalid column index")
 
-    # Create a new Excel writer
-    output_excel = BytesIO()
-    writer = pd.ExcelWriter(output_excel, engine='openpyxl')
-    writer.book = Workbook()
+        # Sort the DataFrame by the specified column in descending order
+        df_sorted = df.sort_values(by=df.columns[column_index], ascending=False)
 
-    # Convert the DataFrame back to Excel format
-    df.to_excel(writer, sheet_name='Sheet1', index=False)
+        # Create an in-memory Excel writer
+        excel_writer = pd.ExcelWriter('in_memory_excel.xlsx', engine='openpyxl')
+        df_sorted.to_excel(excel_writer, index=False)
 
-    # Save the Excel file in memory
-    writer.save()
-    writer.close()
+        # Get the in-memory Excel object
+        in_memory_excel = excel_writer.save()
 
-    # Reset the buffer position and return the sorted Excel file
-    output_excel.seek(0)
-
-    return output_excel
+        return in_memory_excel
+    except Exception as e:
+        return str(e)
