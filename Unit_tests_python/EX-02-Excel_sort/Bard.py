@@ -1,32 +1,32 @@
 import pandas as pd
+import tempfile
 
-def excel_sort(file_path, col_index):
-  """
-  Sorts an Excel file's data based on a specified column in descending order.
+def excel_sort(file_path, column_index):
+   """Sorts data in an Excel file by a specified column and saves the sorted data to a temporary file.
 
-  Args:
-    file_path: The path to the Excel file.
-    col_index: The index of the column to sort by (0-based indexing).
+   Args:
+       file_path (str): The path to the Excel file to be sorted.
+       column_index (int): The index of the column to sort by.
 
-  Returns:
-    An in-memory Excel object containing the sorted data.
-  """
+   Returns:
+       str: The path to the temporary Excel file containing the sorted data.
+   """
 
-  # Read the Excel file into a Pandas DataFrame
-  data_frame = pd.read_excel(file_path)
+   try:
+       # Read the Excel file using pandas
+       df = pd.read_excel(file_path)
 
-  # Sort the data by the specified column in descending order
-  sorted_data = data_frame.sort_values(by=col_index, ascending=False)
+       # Sort the DataFrame in descending order based on the specified column
+       df = df.sort_values(by=df.columns[column_index], ascending=False)
 
-  # Convert the sorted DataFrame back into an Excel object
-  excel_obj = pd.ExcelWriter('in_memory_file.xlsx', engine='openpyxl')
-  sorted_data.to_excel(excel_obj)
-  excel_obj.save()
-  excel_obj.close()
+       # Create a temporary file for storing the sorted data
+       with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False) as temp_file:
 
-  # Load the in-memory Excel object
-  with pd.ExcelFile('in_memory_file.xlsx') as xlsx:
-    return xlsx.parse(xlsx.sheet_names[0])
+           # Save the sorted DataFrame to the temporary Excel file
+           df.to_excel(temp_file.name, index=False)
 
-  # (Optional) Delete the temporary in-memory file
-  os.remove('in_memory_file.xlsx')
+           # Return the path to the temporary file
+           return temp_file.name
+
+   except Exception as e:
+       raise ValueError(f"Error sorting Excel file: {e}")
