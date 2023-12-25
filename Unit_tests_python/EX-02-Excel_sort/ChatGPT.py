@@ -1,24 +1,30 @@
 import pandas as pd
+import tempfile
+import shutil
 
 def excel_sort(file_path, column_index):
+    # Read the Excel file into a DataFrame
     try:
-        # Read the Excel file into a DataFrame
         df = pd.read_excel(file_path)
-
-        # Check if the column_index is valid
-        if column_index < 0 or column_index >= len(df.columns):
-            raise ValueError("Invalid column index")
-
-        # Sort the DataFrame by the specified column in descending order
-        df_sorted = df.sort_values(by=df.columns[column_index], ascending=False)
-
-        # Create an in-memory Excel writer
-        excel_writer = pd.ExcelWriter('in_memory_excel.xlsx', engine='openpyxl')
-        df_sorted.to_excel(excel_writer, index=False)
-
-        # Get the in-memory Excel object
-        in_memory_excel = excel_writer.save()
-
-        return in_memory_excel
     except Exception as e:
-        return str(e)
+        return str(e)  # Handle file read errors
+    
+    # Sort the DataFrame by the specified column in descending order
+    try:
+        df = df.sort_values(df.columns[column_index], ascending=False, na_position='last')
+    except Exception as e:
+        return str(e)  # Handle sorting errors
+    
+    # Create a temporary directory to store the sorted Excel file
+    temp_dir = tempfile.mkdtemp()
+    
+    # Generate a temporary file name
+    temp_file_path = temp_dir + "/sorted_data.xlsx"
+    
+    # Save the sorted DataFrame to the temporary Excel file
+    try:
+        df.to_excel(temp_file_path, index=False)
+    except Exception as e:
+        return str(e)  # Handle file save errors
+    
+    return temp_file_path

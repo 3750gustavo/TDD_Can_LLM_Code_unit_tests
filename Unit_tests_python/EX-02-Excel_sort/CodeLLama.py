@@ -1,11 +1,17 @@
 import pandas as pd
+import tempfile
 
 def excel_sort(file_path, column_index):
-    # Read the Excel file into a pandas DataFrame
+    # Read the data from the specified Excel file
     df = pd.read_excel(file_path)
 
-    # Sort the DataFrame based on the specified column in descending order
+    # Sort the data in descending order based on the values in the specified column
     df = df.sort_values(by=df.columns[column_index], ascending=False)
 
-    # Return the sorted DataFrame as an in-memory Excel object
-    return df.to_excel()
+    # Handle sorting of columns with mixed data types
+    df = df.apply(lambda x: x.astype(str) if x.dtype == 'object' else x)
+
+    # Save the sorted data to a temporary Excel file on disk
+    with tempfile.NamedTemporaryFile(suffix='.xlsx') as tmp:
+        df.to_excel(tmp.name, index=False)
+        return tmp.name
