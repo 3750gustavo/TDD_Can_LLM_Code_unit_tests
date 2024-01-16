@@ -2,12 +2,14 @@ import pytest
 from ChatGPT import zipfs_law as ChatGPT
 from CodeLLama import zipfs_law as CodeLLama
 from Bard import zipfs_law as Bard
+from Perplexity import zipfs_law as Perplexity
 
 # Define the implementations with their names
 implementations = [
     (ChatGPT, 'ChatGPT'),
     (CodeLLama, 'CodeLLama'),
-    (Bard, 'Bard')
+    (Bard, 'Bard'),
+    (Perplexity, 'Perplexity')
 ]
 
 string_input = '''toward it, and then stopped.
