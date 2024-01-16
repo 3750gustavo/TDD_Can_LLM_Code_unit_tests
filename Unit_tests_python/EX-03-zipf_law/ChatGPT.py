@@ -1,17 +1,17 @@
 import re
 from collections import Counter
 
-def zipfs_law(input_string):
-    # Tokenize the input string into words
-    words = re.findall(r'\b\w+\b', input_string.lower())
+def zipfs_law(text):
+    # Remove punctuation and convert to lowercase
+    text = re.sub(r'[^\w\s]', '', text.lower())
     
-    # Count the frequency of each word
-    word_count = Counter(words)
-    
-    # Sort the words by their frequency in descending order
-    sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
-    
-    # Get the top 10 words
-    top_10_words = [word for word, frequency in sorted_words[:10]]
-    
+    # Tokenize the text into words
+    words = text.split()
+
+    # Use Counter to count word frequencies
+    word_counts = Counter(words)
+
+    # Get the top 10 most common words
+    top_10_words = [word for word, _ in word_counts.most_common(10)]
+
     return top_10_words

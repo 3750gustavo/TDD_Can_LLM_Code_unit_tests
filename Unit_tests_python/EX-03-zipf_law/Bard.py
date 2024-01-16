@@ -1,30 +1,25 @@
-from collections import Counter
+import re
 
 def zipfs_law(text):
- """
- Finds the top 10 most frequent words in a text using Zipf's Law.
+ """Applies Zipf's Law to find the top 10 most frequently used words in a string.
 
  Args:
-     text: A string containing the text to analyze.
+   text: The string to analyze.
 
  Returns:
-     A list of the top 10 most frequent words in the text, ordered by decreasing frequency.
+   A list of the top 10 most frequently used words in descending order.
  """
 
- # Lowercase the text and remove punctuation.
- text = text.lower()
- text = "".join(char for char in text if char.isalnum() or char.isspace())
+ # Remove punctuation and convert to lowercase
+ words = re.sub(r'[^\w\s]', '', text.lower()).split()
 
- # Split the text into words.
- words = text.split()
+ # Create a word frequency dictionary
+ word_counts = {}
+ for word in words:
+   word_counts[word] = word_counts.get(word, 0) + 1
 
- # Count the frequency of each word.
- word_counts = Counter(words)
+ # Sort the words by frequency in descending order
+ sorted_words = sorted(word_counts, key=word_counts.get, reverse=True)
 
- # Sort the word counts by frequency in descending order.
- most_frequent_words = word_counts.most_common(10)
-
- # Extract the words from the tuples.
- top_10_words = [word for word, _ in most_frequent_words]
-
- return top_10_words
+ # Return the top 10 words
+ return sorted_words[:10]
