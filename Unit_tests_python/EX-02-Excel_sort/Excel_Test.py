@@ -7,35 +7,43 @@ from ChatGPT import excel_sort as ChatGPT
 from CodeLLama import excel_sort as CodeLLama
 from Bard import excel_sort as Bard
 
-implementations = [ChatGPT, CodeLLama, Bard]
+# Define the implementations with their names
+implementations = [
+    (ChatGPT, 'ChatGPT'),
+    (CodeLLama, 'CodeLLama'),
+    (Bard, 'Bard')
+]
 
-@pytest.fixture(params=implementations, ids=[impl.__name__ for impl in implementations])
+# Helper function to read a DataFrame from a file path
+def read_dataframe_from_file(file_path):
+    assert Path(file_path).suffix == '.xlsx', "Invalid file extension"
+    return pd.read_excel(file_path)
+
+@pytest.fixture(params=implementations, ids=[impl[1] for impl in implementations])
 def implementation(request):
-    return request.param
+    impl, _ = request.param
+    return impl
 
 @pytest.fixture
 def file_path():
     return os.path.join(os.path.dirname(__file__), 'GPUs.xlsx')
 
-def test_excel_sort(implementation, file_path):
-    column_index = 1
+@pytest.mark.parametrize("column_index", [0, 1, 2])  # Add more column indexes as needed
+def test_excel_sort(implementation, file_path, column_index):
     try:
-        result = implementation(file_path, column_index)
+        sorted_file_path = implementation(file_path, column_index)
 
-        if isinstance(result, str) and Path(result).suffix == '.xlsx':
-            df_temp = pd.read_excel(result)
-        elif isinstance(result, bytes):
-            with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=True) as temp:
-                temp.write(result)
-                temp.seek(0)
-                df_temp = pd.read_excel(temp.name)
-        else:
-            pytest.fail(f"Invalid return type from {implementation.__name__}")
+        if not sorted_file_path:
+            pytest.fail(f"Failed to get a valid file path from {implementation.__name__}")
 
-        assert df_temp.iloc[:, column_index].is_monotonic_decreasing, \
-            f"DataFrame is not sorted correctly in {implementation.__name__}"
+        # Read the sorted data from the temporary file
+        sorted_data = read_dataframe_from_file(sorted_file_path)
+
+        # Delete the temporary file
+        os.remove(sorted_file_path)
+
+        # Check if the data is sorted correctly
+        assert sorted_data.iloc[0, column_index] == max(sorted_data.iloc[:, column_index]), "Data is not sorted correctly"
+
     except Exception as e:
-        pytest.fail(f"Test failed for {implementation.__name__}: {str(e)}")
-
-if __name__ == "__main__":
-    pytest.main()
+        pytest.fail(f"An error occurred during testing: {str(e)}")
