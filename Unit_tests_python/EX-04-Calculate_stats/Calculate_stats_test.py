@@ -1,11 +1,13 @@
 import pytest
 from ChatGPT import calculate_stats as ChatGPT
 from CodeLLama import calculate_stats as CodeLLama
-
+from Copilot import calculate_stats as Copilot
+    
 # Define the implementations with their names
 implementations = [
     (ChatGPT, 'ChatGPT'),
-    (CodeLLama, 'CodeLLama')
+    (CodeLLama, 'CodeLLama'),
+    (Copilot, 'Copilot')
 ]
 
 # Define the 3 input lists with 3 types of levels of variation in the data
@@ -19,9 +21,9 @@ list3 = [1,19,9,5,2,18,13,7,4,6]
 
 # Define the expected results
 expected_results = {
-    'mean_list1': 10.0, 'stddev_list1': 1.0,
-    'mean_list2': 10.3, 'stddev_list2': 4.0,
-    'mean_list3': 9.4, 'stddev_list3': 6.0
+    'mean_list1': 10.1, 'stddev_list1': 1.1357816691601,
+    'mean_list2': 10.6, 'stddev_list2': 4.7581509013481,
+    'mean_list3': 8.4, 'stddev_list3': 6.0033324079215
 }
 
 @pytest.fixture(params=implementations, ids=[impl[1] for impl in implementations])
@@ -30,16 +32,21 @@ def implementation(request):
     return impl
 
 def test_calculate_stats(implementation):
-    # Calculate the stats
-    stats = implementation(list1, list2, list3)
-    # Check the mean and standard deviation for each list
-    assert stats['mean_list1'] == expected_results['mean_list1'], f"Test failed for {implementation.__name__}. Mean for list1 mismatch. Expected: {expected_results['mean_list1']}, got: {stats['mean_list1']}"
-    assert stats['stddev_list1'] == expected_results['stddev_list1'], f"Test failed for {implementation.__name__}. Stddev for list1 mismatch. Expected: {expected_results['stddev_list1']}, got: {stats['stddev_list1']}"
-    assert stats['mean_list2'] == expected_results['mean_list2'], f"Test failed for {implementation.__name__}. Mean for list2 mismatch. Expected: {expected_results['mean_list2']}, got: {stats['mean_list2']}"
-    assert stats['stddev_list2'] == expected_results['stddev_list2'], f"Test failed for {implementation.__name__}. Stddev for list2 mismatch. Expected: {expected_results['stddev_list2']}, got: {stats['stddev_list2']}"
-    assert stats['mean_list3'] == expected_results['mean_list3'], f"Test failed for {implementation.__name__}. Mean for list3 mismatch. Expected: {expected_results['mean_list3']}, got: {stats['mean_list3']}"
-    assert stats['stddev_list3'] == expected_results['stddev_list3'], f"Test failed for {implementation.__name__}. Stddev for list3 mismatch. Expected: {expected_results['stddev_list3']}, got: {stats['stddev_list3']}"
-
+    # Call the implementation to get the results dictionary
+    results = implementation(list1, list2, list3)
+    # Check the results
+    try:
+        for key, value in expected_results.items():
+            assert results[key] == value, (
+                f"Test failed for {implementation.__name__}. "
+                f"Expected {key}: {value}, got: {results[key]}"
+            )
+    except AssertionError as ae:
+        print(f"Test failed for {implementation.__name__}. Output dictionary: {results}")
+        raise ae
+    except Exception as e:
+        pytest.fail(f"An error occurred during testing: {str(e)}")
+        
 # To execute this test, run the following command:
 # pytest -v -s F:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-04-Calculate_stats\Calculate_stats_test.py
 # -v: verbose
