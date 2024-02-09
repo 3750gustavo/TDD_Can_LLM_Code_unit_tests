@@ -3,13 +3,17 @@ from ChatGPT import zipfs_law as ChatGPT
 from CodeLLama import zipfs_law as CodeLLama
 from Bard import zipfs_law as Bard
 from Perplexity import zipfs_law as Perplexity
+from Claude import zipfs_law as Claude
+from Copilot import zipfs_law as Copilot
 
 # Define the implementations with their names
 implementations = [
     (ChatGPT, 'ChatGPT'),
     (CodeLLama, 'CodeLLama'),
     (Bard, 'Bard'),
-    (Perplexity, 'Perplexity')
+    (Perplexity, 'Perplexity'),
+    (Claude, 'Claude'),
+    (Copilot, 'Copilot')
 ]
 
 string_input = '''toward it, and then stopped.
