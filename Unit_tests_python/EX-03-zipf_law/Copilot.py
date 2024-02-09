@@ -1,14 +1,7 @@
-import re
-from collections import Counter
+import statistics
 
-def zipfs_law(string):
-    # Remove punctuation and convert to lowercase
-    string = re.sub(r'[^\w\s]', '', string.lower())
-    
-    # Count the frequency of each word
-    word_counts = Counter(string.split())
-    
-    # Get the top 10 most frequent words
-    top_10_words = [word for word, count in word_counts.most_common(10)]
-    
-    return top_10_words
+def calculate_stats(list1, list2, list3):
+    stats = {}
+    stats['mean'] = [statistics.mean(list1), statistics.mean(list2), statistics.mean(list3)]
+    stats['stddev'] = [statistics.stdev(list1), statistics.stdev(list2), statistics.stdev(list3)]
+    return stats
