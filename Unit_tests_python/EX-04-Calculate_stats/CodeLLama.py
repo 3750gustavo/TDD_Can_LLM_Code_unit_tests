@@ -1,4 +1,4 @@
-from statistics import mean, stddev
+import statistics
 
 def calculate_stats(list1, list2, list3):
     means = [mean(list1), mean(list2), mean(list3)]
