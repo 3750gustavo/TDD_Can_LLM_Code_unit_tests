@@ -1,8 +1,8 @@
-## EXCEL Prompts EX 02 versions:
+## EXCEL Prompts EX 02 versions
 
 # Original Prompt: Write a Python function called "excel_sort" that takes an input Excel file path and column numbers as parameters, then sorts the data in each specified column in descending order using pandas library. Finally, display the sorted data.
 
-## Revisions:
+## Revisions
 
 1. Write a Python function named "excel_sort" that accepts an Excel file path and column numbers as parameters. This function sorts the data in each specified column in descending order using the pandas library and returns a new Excel file containing the sorted data.
    - Reason: This revision clarifies that the function creates a new Excel file with sorted data instead of just displaying it.
