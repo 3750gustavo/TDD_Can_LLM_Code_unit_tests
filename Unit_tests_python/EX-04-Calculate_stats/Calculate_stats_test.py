@@ -29,19 +29,29 @@ def implementation(request):
     impl, _ = request.param
     return impl
 
-def test_calculate_stats(implementation):
+def test_calculate_mean(implementation):
     # Call the implementation to get the results dictionary
     results = implementation(list1, list2, list3)
     # Check the results
     expected_mean = expected_results['mean']
-    expected_std_dev = expected_results['stddev']
     try:
         for i in range(len(expected_mean)):
             assert abs(results['mean'][i] - expected_mean[i]) < 0.0001, (
                 f"Test failed for {implementation.__name__}. "
                 f"Expected mean: {expected_mean[i]}, got: {results['mean'][i]}"
             )
+    except AssertionError as ae:
+        print(f"Test failed for {implementation.__name__}. Output dictionary: {results}")
+        raise ae
+    except Exception as e:
+        pytest.fail(f"An error occurred during testing: {str(e)}")
 
+def test_calculate_stddev(implementation):
+    # Call the implementation to get the results dictionary
+    results = implementation(list1, list2, list3)
+    # Check the results
+    expected_std_dev = expected_results['stddev']
+    try:
         for i in range(len(expected_std_dev)):
             assert abs(results['stddev'][i] - expected_std_dev[i]) < 0.0001, (
                 f"Test failed for {implementation.__name__}. "
