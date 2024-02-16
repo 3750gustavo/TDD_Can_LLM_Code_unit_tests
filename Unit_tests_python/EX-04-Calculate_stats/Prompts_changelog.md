@@ -9,3 +9,6 @@
 
 2. Write a Python function named "calculate_stats" that accepts three lists of numbers as input. This function should calculate the mean and standard deviation for each list and return these values as a dictionary with keys 'mean' and 'stddev', be sure to include the imports before the function definition.
    - Reason: This revision clarifies that the function should include the imports before the function definition.
+
+3. Write a Python function named "calculate_stats" that accepts three lists of numbers as input. This function should calculate the mean and standard deviation for each list using the population standard deviation formula, and return these values as a dictionary with keys 'mean' and 'stddev'. Be sure to include the necessary imports before the function definition.
+   - Reason: This revision explicitly states the requirement to use the population standard deviation formula, ensuring consistency and accuracy across all implementations.
