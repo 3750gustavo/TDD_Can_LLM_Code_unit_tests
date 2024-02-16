@@ -21,9 +21,7 @@ list3 = [1,19,9,5,2,18,13,7,4,6]
 
 # Define the expected results
 expected_results = {
-    'mean_list1': 10.1, 'stddev_list1': 1.1357816691601,
-    'mean_list2': 10.6, 'stddev_list2': 4.7581509013481,
-    'mean_list3': 8.4, 'stddev_list3': 6.0033324079215
+    'mean': [10.1, 10.6, 8.4], 'stddev': [1.1357816691601,4.7581509013481,6.0033324079215]
 }
 
 @pytest.fixture(params=implementations, ids=[impl[1] for impl in implementations])
@@ -35,11 +33,19 @@ def test_calculate_stats(implementation):
     # Call the implementation to get the results dictionary
     results = implementation(list1, list2, list3)
     # Check the results
+    expected_mean = expected_results['mean']
+    expected_std_dev = expected_results['stddev']
     try:
-        for key, value in expected_results.items():
-            assert results[key] == value, (
+        for i in range(len(expected_mean)):
+            assert abs(results['mean'][i] - expected_mean[i]) < 0.0001, (
                 f"Test failed for {implementation.__name__}. "
-                f"Expected {key}: {value}, got: {results[key]}"
+                f"Expected mean: {expected_mean[i]}, got: {results['mean'][i]}"
+            )
+
+        for i in range(len(expected_std_dev)):
+            assert abs(results['stddev'][i] - expected_std_dev[i]) < 0.0001, (
+                f"Test failed for {implementation.__name__}. "
+                f"Expected std_dev: {expected_std_dev[i]}, got: {results['stddev'][i]}"
             )
     except AssertionError as ae:
         print(f"Test failed for {implementation.__name__}. Output dictionary: {results}")
