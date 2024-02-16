@@ -1,15 +1,10 @@
-import numpy as np
+import math
 
 def calculate_stats(list1, list2, list3):
-    """
-    Calculate the mean and standard deviation for each list of numbers.
-
-    Args:
-        list1, list2, list3: Lists of numbers.
-
-    Returns:
-        A dictionary with keys 'mean' and 'stddev' containing the mean and standard deviation for each list.
-    """
-    means = [np.mean(list1), np.mean(list2), np.mean(list3)]
-    stddevs = [np.std(list1), np.std(list2), np.std(list3)]
-    return {'mean': means, 'stddev': stddevs}
+    mean1 = sum(list1) / len(list1)
+    mean2 = sum(list2) / len(list2)
+    mean3 = sum(list3) / len(list3)
+    stddev1 = math.sqrt(sum((x - mean1)**2 for x in list1) / len(list1))
+    stddev2 = math.sqrt(sum((x - mean2)**2 for x in list2) / len(list2))
+    stddev3 = math.sqrt(sum((x - mean3)**2 for x in list3) / len(list3))
+    return {'mean': [mean1, mean2, mean3], 'stddev': [stddev1, stddev2, stddev3]}
