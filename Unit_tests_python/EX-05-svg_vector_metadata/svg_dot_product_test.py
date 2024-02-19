@@ -1,13 +1,20 @@
 import pytest
+# for path handling
+import os
+# Import the implementations
 from Perplexity import svg_dot_product as Perplexity
+from Copilot import svg_dot_product as Copilot
+from CodeLLama import svg_dot_product as CodeLLama
 
 # Define the implementations with their names
 implementations = [
-    (Perplexity, 'Perplexity')
+    (Perplexity, 'Perplexity'),
+    (Copilot, 'Copilot'),
+    (CodeLLama, 'CodeLLama')
 ]
 
 # SVG relative file path
-svg_file_path = 'vector.svg'
+svg_file_path = os.path.join(os.path.dirname(__file__), "test.svg")
 
 # Define the expected results
 dot_product = 32
