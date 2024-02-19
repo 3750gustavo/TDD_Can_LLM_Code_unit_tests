@@ -2,12 +2,18 @@ import pytest
 from ChatGPT import calculate_stats as ChatGPT
 from CodeLLama import calculate_stats as CodeLLama
 from Copilot import calculate_stats as Copilot
+from Bard import calculate_stats as Bard
+from Claude import calculate_stats as Claude
+from Perplexity import calculate_stats as Perplexity
     
 # Define the implementations with their names
 implementations = [
     (ChatGPT, 'ChatGPT'),
     (CodeLLama, 'CodeLLama'),
-    (Copilot, 'Copilot')
+    (Copilot, 'Copilot'),
+    (Bard, 'Bard'),
+    (Claude, 'Claude'),
+    (Perplexity, 'Perplexity')
 ]
 
 # Define the 3 input lists with 3 types of levels of variation in the data
