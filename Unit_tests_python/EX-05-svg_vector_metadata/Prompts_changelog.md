@@ -4,5 +4,5 @@
 
 ## Revisions
 
-1. Write a Python function named "svg_dot_product" that receives a SVG file path as a parameter. This function should return the dot product of two vectors found within the SVG's <metadata>. The vectors are represented as text content of <vector> elements (e.g., <vector>1,2,3</vector>). If there are fewer than two vectors in the metadata or if they cannot be parsed, the function should return -1.
+1. Write a Python function named "svg_dot_product" that receives a SVG file path as a parameter. This function should return the dot product of two vectors found within the SVG's <metadata>. The vectors are represented as text content of <vector> elements (e.g., <vector>1,2,3</vector>). If there are fewer than two vectors in the metadata or if they cannot be parsed, the function should return -1
    - Reason: This revision clarifies expectations for the function's input and output, as well as the handling of edge cases.
