@@ -44,6 +44,8 @@ The function generates a detailed report summarizing the outcome of the comparis
 3. **Failed_Tests (list of dictionaries)**: A list of detailed descriptions of failed tests. Each dictionary in this list contains the following key-value pairs:
 
     * **Test**: A string describing the type of comparison test that failed.
-    * **Failed_Files (list of strings)**: A list of file names that failed the test.
-    * **Failure_Location (string)**: A string specifying where the failed test occurred, i.e., 'dir1', 'dir2', or 'both'.
+    * **Failed_Files**: A list of file names that failed the test.
+    * **Failure_Location**: A string specifying where the failed test occurred, i.e., 'dir1', 'dir2'.
+
+PS: The Failure_Location is the directory with the oldest modification date for the files that failed the test, i.e., 'dir1' if the file with the same name in dir1 has an older modification date than the file in dir2.
     - Reason: This revision provides a more detailed description of the function's behavior and requirements, including the structure of the output report and the specific details to be included in the report. It also clarifies that the function should compare similar sets of files in the two directories and that the comparison should include differences in content and last modified dates.
