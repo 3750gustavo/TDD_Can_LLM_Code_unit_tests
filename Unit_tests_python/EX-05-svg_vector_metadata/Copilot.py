@@ -1,30 +1,24 @@
 import xml.etree.ElementTree as ET
 
-def svg_dot_product(svg_file_path):
+def svg_dot_product(file_path):
     try:
-        tree = ET.parse(svg_file_path)
+        tree = ET.parse(file_path)
         root = tree.getroot()
         
-        # Find the metadata element
         metadata = root.find("{http://www.w3.org/2000/svg}metadata")
-        
-        if metadata is None:
-            return -1
-        
-        # Find the vector elements
-        vectors = metadata.findall(".//{http://www.w3.org/2000/svg}vector")
+        vectors = metadata.findall("{http://www.w3.org/2000/svg}vector")
         
         if len(vectors) < 2:
             return -1
         
-        # Parse the vector coordinates
-        vector1 = [float(vectors[0].get("x")), float(vectors[0].get("y"))]
-        vector2 = [float(vectors[1].get("x")), float(vectors[1].get("y"))]
+        vector1 = vectors[0].text
+        vector2 = vectors[1].text
         
-        # Calculate the dot product
-        dot_product = vector1[0] * vector2[0] + vector1[1] * vector2[1]
+        vector1_values = [float(value) for value in vector1.split(",")]
+        vector2_values = [float(value) for value in vector2.split(",")]
+        
+        dot_product = sum(a * b for a, b in zip(vector1_values, vector2_values))
         
         return dot_product
-    
-    except (ET.ParseError, ValueError):
+    except:
         return -1
