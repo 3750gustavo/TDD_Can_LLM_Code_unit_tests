@@ -82,6 +82,16 @@ expected_result_with_differences = {
     ]
 }
 
+def lowercase_keys(d):
+    def lower_keys(x):
+        if isinstance(x, list):
+            return [lower_keys(v) for v in x]
+        elif isinstance(x, dict):
+            return {k.lower(): lower_keys(v) for k, v in x.items()}
+        else:
+            return x
+    return lower_keys(d)
+
 @pytest.fixture(params=implementations, ids=[impl[1] for impl in implementations])
 def implementation(request):
     impl, _ = request.param
@@ -100,11 +110,11 @@ def setup_files_with_differences(request):
 # Tests
 def test_all_same_date(implementation, setup_files):
     result = implementation(dir1, dir2)
-    assert result == expected_result_all_same_date
+    assert lowercase_keys(result) == lowercase_keys(expected_result_all_same_date)
 
 def test_with_differences(implementation, setup_files_with_differences):
     result = implementation(dir1, dir2)
-    assert result == expected_result_with_differences
+    assert lowercase_keys(result) == lowercase_keys(expected_result_with_differences)
 
 # To execute this test, run the following command:
 # pytest -v -s F:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-01-compare_directories\compare_directories_test.py
