@@ -37,11 +37,11 @@ Both directories contain similar sets of files, but potentially with differences
 
 The function generates a detailed report summarizing the outcome of the comparison. The report consists of a dictionary with the following key-value pairs:
 
-1. **Passed (boolean)**: This value is True if all tests pass, and False if any test fails.
+1. **Passed**: This value is True if all tests pass, and False if any test fails.
 
-2. **Failed_Count (integer)**: The total count of failed tests.
+2. **Failed_Count**: The total count of failed tests.
 
-3. **Failed_Tests (list of dictionaries)**: A list of detailed descriptions of failed tests. Each dictionary in this list contains the following key-value pairs:
+3. **Failed_Tests**: A list of detailed descriptions of failed tests. Each dictionary in this list contains the following key-value pairs:
 
     * **Test**: A string describing the type of comparison test that failed.
     * **Failed_Files**: A list of file names that failed the test.
