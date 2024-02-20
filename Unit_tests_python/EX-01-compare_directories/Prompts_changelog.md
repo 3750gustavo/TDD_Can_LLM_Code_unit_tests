@@ -46,6 +46,30 @@ The function generates a detailed report summarizing the outcome of the comparis
     * **Test**: A string describing the type of comparison test that failed.
     * **Failed_Files**: A list of file names that failed the test.
     * **Failure_Location**: A string specifying where the failed test occurred, i.e., 'dir1', 'dir2'.
+    - Reason: This revision provides a more detailed description of the function's behavior and requirements, including the structure of the output report and the specific details to be included in the report. It also clarifies that the function should compare similar sets of files in the two directories and that the comparison should include differences in content and last modified dates.
+
+3. Write a Python function `compare_directories` that compares two given directories (`dir1`, `dir2`) and returns a detailed report of the comparison as a dictionary. The function should meet the following requirements:
+
+**Input Parameters:**
+
+The function accepts two arguments:
+
+* **Directory 1 (dir1)**: A path to the first directory to be compared.
+* **Directory 2 (dir2)**: A path to the second directory to be compared.
+
+Both directories contain similar sets of files, but potentially with differences in content and last modified dates.
+
+**Output Report Structure:**
+
+The function generates a detailed report summarizing the outcome of the comparison. The report consists of a dictionary with the following key-value pairs:
+
+1. **Passed**: This value is True if all tests pass, and False if any test fails.
+
+2. **Failed_Count**: The total count of failed tests.
+
+3. **Failed_Tests**: A list of detailed descriptions of failed tests. Each dictionary in this list contains the following key-value pairs:
+        * **Failed_Files**: A list of file names that failed the test.
+        * **Failure_Location**: A string specifying where the failed test occurred, i.e., 'dir1', 'dir2'.
 
 PS: The Failure_Location is the directory with the oldest modification date for the files that failed the test, i.e., 'dir1' if the file with the same name in dir1 has an older modification date than the file in dir2.
-    - Reason: This revision provides a more detailed description of the function's behavior and requirements, including the structure of the output report and the specific details to be included in the report. It also clarifies that the function should compare similar sets of files in the two directories and that the comparison should include differences in content and last modified dates.
+    - Reason: This revision simplifies the output report structure by removing the "Test" key and clarifies that the function should compare similar sets of files in the two directories, including differences in content and last modified dates. It also provides a specific rule for determining the failure location based on the modification dates of the files that failed the test.
