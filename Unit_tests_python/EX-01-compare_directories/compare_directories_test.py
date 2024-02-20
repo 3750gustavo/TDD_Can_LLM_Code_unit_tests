@@ -5,11 +5,13 @@ import datetime
 # Import implementations
 from Perplexity import compare_directories as Perplexity
 from Copilot import compare_directories as Copilot
+from ChatGPT import compare_directories as ChatGPT
 
 # Define the implementations with their names
 implementations = [
     (Perplexity, 'Perplexity'),
-    (Copilot, 'Copilot')
+    (Copilot, 'Copilot'),
+    (ChatGPT, 'ChatGPT')
 ]
 
 # Folders paths
