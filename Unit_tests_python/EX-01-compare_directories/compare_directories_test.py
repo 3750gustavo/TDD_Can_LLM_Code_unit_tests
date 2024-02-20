@@ -85,20 +85,20 @@ def delete_files():
 
 # Expected result for the first test where all files have the same modification date
 expected_result_all_same_date = {
-    "passed": True,
-    "failed_count": 0,
-    "failed_tests": []
+    "Passed": True,
+    "Failed_count": 0,
+    "Failed_tests": []
 }
 
 # Expected result for the test where three files differ, but only two of them are in both folders
 expected_result_with_differences = {
-    "passed": False,
-    "failed_count": 2,
-    "failed_tests": [
+    "Passed": False,
+    "Failed_count": 2,
+    "Failed_tests": [
         {
-            "test": "File Existence",
-            "failed_files": ["file0.txt", "file1.txt"],
-            "failure_location": "both"
+            "Test": "File Existence",
+            "Failed_Files": ["file0.txt", "file1.txt"],
+            "Failure_Location": "both"
         }
     ]
 }
