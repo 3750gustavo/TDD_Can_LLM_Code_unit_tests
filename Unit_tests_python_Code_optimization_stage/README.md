@@ -7,7 +7,6 @@ The second stage of LLM tests focuses on assessing the Large Language Models' ab
 The aim is to assess the LLM's skill in applying the 'Do Not Repeat Yourself' (DRY) principle to refactor given code effectively. Consider the scenario where repetitive logic exists across multiple functions related to handling a shopping cart system:
 
 ```python
-# Given code
 def calculate_total_price(items):
     total = 0
     for item in items:
