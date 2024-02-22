@@ -22,6 +22,13 @@ def calculate_total_with_discount(items, discount):
     return total - discount_amount
 ```
 
+Before you begin coding, outline the following in markdown format using bullet points:
+- Describe the functionality: Detail what the current code accomplishes, including its handling of a shopping cart system.
+- Identify repetition: Pinpoint areas in the code where logic or code is repeated.
+- Explain DRY: Define the 'Do Not Repeat Yourself' (DRY) principle and its importance in coding.
+- Apply DRY to the code: Discuss how the DRY principle can be applied to the current code to reduce redundancy.
+- Implement changes: Describe how you will incorporate the DRY principle into your code refactoring process.
+
 ### Second Test: Code Optimization for Performance and Readability
 
 **Instruction Prompt:**
