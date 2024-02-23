@@ -8,6 +8,7 @@ from ChatGPT import compare_directories as ChatGPT
 from CodeLLama import compare_directories as CodeLLama
 from Bard import compare_directories as Bard
 from Claude import compare_directories as Claude
+# from Perplexity import compare_directories as Perplexity
 
 # Define the implementations with their names
 implementations = [
@@ -16,6 +17,7 @@ implementations = [
     (CodeLLama, 'CodeLLama'),
     (Bard, 'Bard'),
     (Claude, 'Claude')
+    # (Perplexity, 'Perplexity')
 ]
 
 # Folders paths
