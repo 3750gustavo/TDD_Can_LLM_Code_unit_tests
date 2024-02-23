@@ -6,12 +6,16 @@ import datetime
 from Copilot import compare_directories as Copilot
 from ChatGPT import compare_directories as ChatGPT
 from CodeLLama import compare_directories as CodeLLama
+from Bard import compare_directories as Bard
+from Claude import compare_directories as Claude
 
 # Define the implementations with their names
 implementations = [
     (Copilot, 'Copilot'),
     (ChatGPT, 'ChatGPT'),
-    (CodeLLama, 'CodeLLama')
+    (CodeLLama, 'CodeLLama'),
+    (Bard, 'Bard'),
+    (Claude, 'Claude')
 ]
 
 # Folders paths
