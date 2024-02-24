@@ -2,20 +2,22 @@
 
 This repository is dedicated to exploring and testing the capabilities of Language Learning Models (LLMs) in coding, particularly focusing on unit testing and statistical analysis implementations in Lua and Python. Our goal is to leverage LLMs to improve code quality and efficiency.
 
-## Recent Highlights
-
-- **EX-05 SVG Vector Implementations**: Initiatives to harness SVG vectors for graphical representations, pending the development of unit tests.
-- **Lua Tests for SVG Dot Product**: Development of specific tests for SVG dot product calculations, ensuring accuracy and reliability.
-- **Statistical Calculations in Lua**: Introduction of raw Lua implementations for statistical analysis across various datasets, aimed at understanding LLM performance metrics.
-- **Comprehensive Lua Testing Framework**: Establishment of a structured Lua testing framework to facilitate robust code testing.
-
 ## Getting Started
 
-To get started with this repository, clone it locally and explore the various Lua and Python scripts. Each script is designed to test different aspects of LLMs' coding capabilities, focusing on statistical analysis and graphical data representation.
+To get started with this repository, clone it locally and explore the various Lua and Python scripts. Each script was made by a different LLM and is designed to test the LLM's coding capabilities. The repository also contains unit tests for each script, which can be run to evaluate the LLM's performance.
 
 ## Contribution
 
-Contributions are welcome, especially in the areas of unit testing and expanding the repository's testing frameworks. If you have suggestions or improvements, please submit a pull request or open an issue.
+Contributions are closed for the time being. We are currently in the process of evaluating the performance of various LLMs on the scripts in this repository. Once we have completed this evaluation, we expect to be able to open up contributions to the public, in the meantime, feel free to fork this repository and experiment with the scripts and unit tests.
+
+## Directory Structure
+
+The repository is organized into the following directories:
+
+- `Unit_tests_lua`: Contains Lua scripts and their corresponding unit tests.
+- `Unit_tests_python`: Contains Python scripts and their corresponding unit tests.
+
+any other directories like `Unit_tests_python_Code_optimization_stage` and possibly in the future `Unit_tests_lua_Code_optimization_stage` are for future use and are not currently in use.
 
 ## License
 
