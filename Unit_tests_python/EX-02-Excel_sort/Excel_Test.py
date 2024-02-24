@@ -6,12 +6,18 @@ from pathlib import Path
 from ChatGPT import excel_sort as ChatGPT
 from CodeLLama import excel_sort as CodeLLama
 from Bard import excel_sort as Bard
+from Copilot import excel_sort as Copilot
+from Claude import excel_sort as Claude
+from Perplexity import excel_sort as Perplexity
 
 # Define the implementations with their names
 implementations = [
     (ChatGPT, 'ChatGPT'),
     (CodeLLama, 'CodeLLama'),
-    (Bard, 'Bard')
+    (Bard, 'Bard'),
+    (Copilot, 'Copilot'),
+    (Claude, 'Claude'),
+    (Perplexity, 'Perplexity')
 ]
 
 # Helper function to read a DataFrame from a file path
