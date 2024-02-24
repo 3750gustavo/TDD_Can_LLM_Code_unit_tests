@@ -2,31 +2,37 @@ import pandas as pd
 import tempfile
 
 def excel_sort(file_path, column_index):
-   """Sorts data in an Excel file by a specified column and saves the sorted data to a temporary file.
+   """
+   Sorts an Excel file based on a specified column in descending order using pandas.
 
    Args:
-       file_path (str): The path to the Excel file to be sorted.
-       column_index (int): The index of the column to sort by.
+       file_path (str): The path to the Excel file.
+       column_index (int): The index of the column to sort by (0-based).
 
    Returns:
-       str: The path to the temporary Excel file containing the sorted data.
+       str: The path to the temporary file with the sorted data.
    """
 
    try:
-       # Read the Excel file using pandas
+       # Read Excel file into a pandas DataFrame
        df = pd.read_excel(file_path)
 
-       # Sort the DataFrame in descending order based on the specified column
+       # Sort DataFrame in descending order by specified column
        df = df.sort_values(by=df.columns[column_index], ascending=False)
 
-       # Create a temporary file for storing the sorted data
+       # Create a temporary file with a unique filename
        with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False) as temp_file:
 
-           # Save the sorted DataFrame to the temporary Excel file
+           # Save sorted DataFrame to the temporary file
            df.to_excel(temp_file.name, index=False)
 
-           # Return the path to the temporary file
-           return temp_file.name
+       # Return the path to the temporary file
+       return temp_file.name
+
+   except FileNotFoundError:
+       print(f"Error: File not found at path: {file_path}")
+       return None
 
    except Exception as e:
-       raise ValueError(f"Error sorting Excel file: {e}")
+       print(f"Error: An unexpected error occurred: {e}")
+       return None
