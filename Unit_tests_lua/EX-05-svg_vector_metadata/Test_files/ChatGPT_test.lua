@@ -39,3 +39,6 @@ function svg_dot_product(svg_path)
     
     return dot_product
 end
+-- TODO: Add test cases
+local result = svg_dot_product("path/to/svg_file.svg")
+print(result)
