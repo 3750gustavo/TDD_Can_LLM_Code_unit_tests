@@ -45,10 +45,3 @@ def display_text_file(file_path):
     except Exception as e:
         messagebox.showerror("Error", str(e))
         return (False, None)
-
-# Example usage:
-result, temp_file_path = display_text_file("example.txt")
-if result:
-    print("Operation was successful. Temporary file path:", temp_file_path)
-else:
-    print("Operation failed.")

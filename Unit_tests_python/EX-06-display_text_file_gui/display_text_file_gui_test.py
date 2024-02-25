@@ -2,11 +2,19 @@ import pytest
 import os
 from CodeLLama import display_text_file as CodeLLama
 from ChatGPT import display_text_file as ChatGPT
+from Bard import display_text_file as Bard
+from Claude import display_text_file as Claude
+from Perplexity import display_text_file as Perplexity
+from Copilot import display_text_file as Copilot
 
 # Define the implementations with their names
 implementations = [
     (CodeLLama, 'CodeLLama'),
-    (ChatGPT, 'ChatGPT')
+    (ChatGPT, 'ChatGPT'),
+    (Bard, 'Bard'),
+    (Claude, 'Claude'),
+    (Perplexity, 'Perplexity'),
+    (Copilot, 'Copilot')
 ]
 
 # Test .txt file path
@@ -79,13 +87,30 @@ def test_display_text_file_sorting(implementation, tmp_path):
         f"Test failed for {implementation.__name__}. "
         f"Expected file path: {file_path}, got: {file_path}"
     )
-    # Assert that the sorted data is as expected
+    # Read the content of the file
     with open(file_path, 'r') as file:
-        lines = file.readlines()
-    sorted_data = [line.strip() for line in lines]
-    assert sorted_data == [f"{name}: {value}" for name, value in expected_sorted_data], (
+        content = file.read()
+
+    # Split the content into lines
+    lines = content.split('\n')
+
+    # Remove any empty lines
+    lines = [line for line in lines if line]
+
+    # first assert that the total number of lines is 3
+    assert len(lines) == 3, (
         f"Test failed for {implementation.__name__}. "
-        f"Expected sorted data: {expected_sorted_data}, got: {sorted_data}"
+        f"Expected 3 lines, got: {len(lines)}"
+    )
+
+    # Parse the data into name-value pairs for the next assertion
+    data = [line.split(':') for line in lines]
+    name_value_pairs = [(name.strip(), float(value.strip())) for name, value in data]
+
+    # Assert that the name-value pairs are sorted in descending order
+    assert name_value_pairs == expected_sorted_data, (
+        f"Test failed for {implementation.__name__}. "
+        f"Expected: {expected_sorted_data}, got: {name_value_pairs}"
     )
 
 # To execute this test, run the following command:
