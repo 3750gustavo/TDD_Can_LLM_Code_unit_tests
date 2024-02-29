@@ -90,40 +90,48 @@ def implementation(request):
     impl, _ = request.param
     return impl
 
-def test_zipf_law(implementation):
-    error_message = lambda pos, word, impl: (
-        f"Test failed for {impl.__name__} at position {pos}. "
-        f"Expected one of {word}, got: {top_10_words[pos - 1]}"
-    )
-
+def test_zipf_law_positions_1_to_6(implementation):
     try:
         top_10_words = implementation(string_input)
         assert top_10_words[:6] == first_6_words, (
-            f"Test failed for {implementation.__name__}. "
-            f"First 6 words mismatch. Expected: {first_6_words}, got: {top_10_words[:6]}"
+            f"First 6 words mismatch for {implementation.__name__}. "
+            f"Expected: {first_6_words}, got: {top_10_words[:6]}"
         )
-        # Check the 7th and 8th words
-        if not all(word in valid_7th8th_words for word in top_10_words[6:8]):
-            pytest.fail(
-                f"Test failed for {implementation.__name__}. "
-                f"7th and 8th words mismatch. Expected any of {valid_7th8th_words}, got: {top_10_words[6:8]}"
-            )
-        # Check the 9th and 10th words
-        if not all(word in valid_9th10th_words for word in top_10_words[8:10]):
-            pytest.fail(
-                f"Test failed for {implementation.__name__}. "
-                f"9th and 10th words mismatch. Expected any of {valid_9th10th_words}, got: {top_10_words[8:10]}"
-            )
-
-        # Additional checks for words with the same frequency in 7th and 8th positions
-        assert len(set(top_10_words[6:8])) == 2, error_message(7, valid_7th8th_words, implementation)
-        # Additional checks for words with the same frequency in 9th and 10th positions
-        assert len(set(top_10_words[8:10])) >= 2, error_message(9, valid_9th10th_words, implementation)
-
     except AssertionError as ae:
-        # Print the output list when the test fails
         print(f"Test failed for {implementation.__name__}. Output list: {top_10_words}")
-        raise ae  # Re-raise the exception to ensure the test is marked as failed
+        raise ae
+    except Exception as e:
+        pytest.fail(f"An error occurred during testing: {str(e)}")
+
+def test_zipf_law_positions_7_and_8(implementation):
+    try:
+        top_10_words = implementation(string_input)
+        assert all(word in valid_7th8th_words for word in top_10_words[6:8]), (
+            f"7th and 8th words mismatch for {implementation.__name__}. "
+            f"Expected any of {valid_7th8th_words}, got: {top_10_words[6:8]}"
+        )
+        assert len(set(top_10_words[6:8])) == 2, (
+            f"Words at positions 7 and 8 don't have different frequencies for {implementation.__name__}"
+        )
+    except AssertionError as ae:
+        print(f"Test failed for {implementation.__name__}. Output list: {top_10_words}")
+        raise ae
+    except Exception as e:
+        pytest.fail(f"An error occurred during testing: {str(e)}")
+
+def test_zipf_law_positions_9_and_10(implementation):
+    try:
+        top_10_words = implementation(string_input)
+        assert all(word in valid_9th10th_words for word in top_10_words[8:10]), (
+            f"9th and 10th words mismatch for {implementation.__name__}. "
+            f"Expected any of {valid_9th10th_words}, got: {top_10_words[8:10]}"
+        )
+        assert len(set(top_10_words[8:10])) >= 2, (
+            f"Words at positions 9 and 10 don't have at least 2 different frequencies for {implementation.__name__}"
+        )
+    except AssertionError as ae:
+        print(f"Test failed for {implementation.__name__}. Output list: {top_10_words}")
+        raise ae
     except Exception as e:
         pytest.fail(f"An error occurred during testing: {str(e)}")
 
