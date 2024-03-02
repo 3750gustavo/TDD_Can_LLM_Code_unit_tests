@@ -30,6 +30,31 @@ def implementation(request):
     impl, _ = request.param
     return impl
 
+# Test with SVG having only one vector in <metadata>, expecting -1
+def test_svg_with_one_vector(implementation):
+    svg_file_path = os.path.join(os.path.dirname(__file__), "one_vector.svg")
+    result = implementation(svg_file_path)
+    assert result == -1, (
+        f"Test failed for {implementation.__name__} with one vector. "
+        "Expected: -1, got: {result}"
+    )
+
+# Test with an SVG containing an unparsable vector, also expecting -1
+def test_svg_with_unparsable_vector(implementation):
+    svg_file_path = os.path.join(os.path.dirname(__file__), "unparsable_vector.svg")
+    result = implementation(svg_file_path)
+    assert result == -1, (
+        f"Test failed for {implementation.__name__} with unparsable vector. "
+        "Expected: -1, got: {result}"
+    )
+
+# Notes:
+# - You'll need to create or modify SVG files named 'one_vector.svg' and 'unparsable_vector.svg'
+#   in your test directory to match these test conditions.
+# - 'one_vector.svg' should contain exactly one <vector> element within <metadata>.
+# - 'unparsable_vector.svg' should contain a <vector> element that does not follow the expected format.
+
+# Test with the given SVG file, expecting the dot product   
 def test_svg_dot_product(implementation):
     # Call the implementation to get the result dot product of the given path
     result = implementation(svg_file_path)
