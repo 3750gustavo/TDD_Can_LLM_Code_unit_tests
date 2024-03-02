@@ -48,12 +48,6 @@ def test_svg_with_unparsable_vector(implementation):
         "Expected: -1, got: {result}"
     )
 
-# Notes:
-# - You'll need to create or modify SVG files named 'one_vector.svg' and 'unparsable_vector.svg'
-#   in your test directory to match these test conditions.
-# - 'one_vector.svg' should contain exactly one <vector> element within <metadata>.
-# - 'unparsable_vector.svg' should contain a <vector> element that does not follow the expected format.
-
 # Test with the given SVG file, expecting the dot product   
 def test_svg_dot_product(implementation):
     # Call the implementation to get the result dot product of the given path
