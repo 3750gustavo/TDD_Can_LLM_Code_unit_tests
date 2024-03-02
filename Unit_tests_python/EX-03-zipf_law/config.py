@@ -1,3 +1,4 @@
+import random, string
 from ChatGPT import zipfs_law as ChatGPT
 from CodeLLama import zipfs_law as CodeLLama
 from Bard import zipfs_law as Bard
@@ -90,3 +91,9 @@ def get_implementations():
 
 def get_string_input():
     return string_input
+
+def generate_random_string(n):
+    return ''.join(random.choice(string.ascii_letters) for _ in range(n))
+
+def text_generator():
+    return lambda n: generate_random_string(n)
