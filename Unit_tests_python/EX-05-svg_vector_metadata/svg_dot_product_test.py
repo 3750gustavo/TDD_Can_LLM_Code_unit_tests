@@ -1,6 +1,4 @@
-import pytest
-# for path handling
-import os
+import pytest, os
 # Import the implementations
 from Perplexity import svg_dot_product as Perplexity
 from Copilot import svg_dot_product as Copilot
