@@ -48,7 +48,3 @@ def compare_directories(dir1, dir2):
         })
 
   return report
-
-# Example usage
-report = compare_directories("/path/to/dir1", "/path/to/dir2")
-print(report)
