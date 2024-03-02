@@ -1,0 +1,15 @@
+Copilot executed in an average of 0.90147 ms for 1000 iterations
+Copilot executed in an average of 0.896628 ms for 10000 iterations
+Copilot executed in an average of 0.886952 ms for 100000 iterations
+ChatGPT executed in an average of 1.11787 ms for 1000 iterations
+ChatGPT executed in an average of 1.119056 ms for 10000 iterations
+ChatGPT executed in an average of 1.1204 ms for 100000 iterations
+CodeLLama executed in an average of 1.463237 ms for 1000 iterations
+CodeLLama executed in an average of 1.4375 ms for 10000 iterations
+CodeLLama executed in an average of 1.430316 ms for 100000 iterations
+Bard executed in an average of 0.677938 ms for 1000 iterations
+Bard executed in an average of 0.675456 ms for 10000 iterations
+Bard executed in an average of 0.676019 ms for 100000 iterations
+Claude executed in an average of 0.771595 ms for 1000 iterations
+Claude executed in an average of 0.770597 ms for 10000 iterations
+Claude executed in an average of 0.766873 ms for 100000 iterations
