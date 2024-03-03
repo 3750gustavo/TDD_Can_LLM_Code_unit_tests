@@ -1,0 +1,112 @@
+PEP8 compliance score and details for ChatGPT:
+************* Module ChatGPT
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:7:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:10:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:15:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:16:0: C0304: Final newline missing (missing-final-newline)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:1:0: C0103: Module name "ChatGPT" doesn't conform to snake_case naming style (invalid-name)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\ChatGPT.py:2:0: C0411: standard import "tempfile" should be placed before third party import "pandas" (wrong-import-order)
+
+------------------------------------------------------------------
+Your code has been rated at 1.11/10 (previous run: 8.26/10, -7.15)
+
+
+--------------------------------------------------------------------------------
+PEP8 compliance score and details for CodeLLama:
+************* Module CodeLLama
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\CodeLLama.py:18:0: C0304: Final newline missing (missing-final-newline)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\CodeLLama.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\CodeLLama.py:1:0: C0103: Module name "CodeLLama" doesn't conform to snake_case naming style (invalid-name)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\CodeLLama.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\CodeLLama.py:12:16: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\CodeLLama.py:2:0: C0411: standard import "tempfile" should be placed before third party import "pandas" (wrong-import-order)
+
+------------------------------------------------------------------
+Your code has been rated at 2.50/10 (previous run: 7.08/10, -4.58)
+
+
+--------------------------------------------------------------------------------
+PEP8 compliance score and details for Bard:
+************* Module Bard
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:5:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:16:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:18:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:21:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:24:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:27:0: W0311: Bad indentation. Found 11 spaces, expected 12 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:30:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:32:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:33:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:34:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:36:0: W0311: Bad indentation. Found 3 spaces, expected 4 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:37:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:38:0: C0304: Final newline missing (missing-final-newline)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:38:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:1:0: C0103: Module name "Bard" doesn't conform to snake_case naming style (invalid-name)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:36:10: W0718: Catching too general exception Exception (broad-exception-caught)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Bard.py:2:0: C0411: standard import "tempfile" should be placed before third party import "pandas" (wrong-import-order)
+
+------------------------------------------------------------------
+Your code has been rated at 0.00/10 (previous run: 0.00/10, +0.00)
+
+
+--------------------------------------------------------------------------------
+PEP8 compliance score and details for Copilot:
+************* Module Copilot
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:7:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:10:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:14:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:17:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:19:0: C0304: Final newline missing (missing-final-newline)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:1:0: C0103: Module name "Copilot" doesn't conform to snake_case naming style (invalid-name)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:12:16: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Copilot.py:2:0: C0411: standard import "tempfile" should be placed before third party import "pandas" (wrong-import-order)
+
+------------------------------------------------------------------
+Your code has been rated at 0.00/10 (previous run: 6.47/10, -6.47)
+
+
+--------------------------------------------------------------------------------
+PEP8 compliance score and details for Claude:
+************* Module Claude
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:7:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:10:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:14:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:17:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:18:0: C0304: Final newline missing (missing-final-newline)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:1:0: C0103: Module name "Claude" doesn't conform to snake_case naming style (invalid-name)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:5:0: C0116: Missing function or method docstring (missing-function-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:12:15: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:2:0: C0411: standard import "tempfile" should be placed before third party import "pandas" (wrong-import-order)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:3:0: C0411: standard import "os" should be placed before third party import "pandas" (wrong-import-order)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Claude.py:3:0: W0611: Unused import os (unused-import)
+
+------------------------------------------------------------------
+Your code has been rated at 0.00/10 (previous run: 4.09/10, -4.09)
+
+
+--------------------------------------------------------------------------------
+PEP8 compliance score and details for Perplexity:
+************* Module Perplexity
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:7:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:10:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:13:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:16:0: C0303: Trailing whitespace (trailing-whitespace)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:17:0: C0304: Final newline missing (missing-final-newline)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:1:0: C0103: Module name "Perplexity" doesn't conform to snake_case naming style (invalid-name)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:12:16: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+f:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_python\EX-02-Excel_sort\Perplexity.py:2:0: C0411: standard import "tempfile" should be placed before third party import "pandas" (wrong-import-order)
+
+------------------------------------------------------------------
+Your code has been rated at 0.00/10 (previous run: 5.00/10, -5.00)
+
+
+--------------------------------------------------------------------------------

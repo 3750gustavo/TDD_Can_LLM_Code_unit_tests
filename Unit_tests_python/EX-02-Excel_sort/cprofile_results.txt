@@ -1,0 +1,6 @@
+ChatGPT executed in an average of 35.827538 ms for 100 iterations
+CodeLLama failed to execute for 100 iterations
+Bard executed in an average of 34.821134 ms for 100 iterations
+Copilot executed in an average of 34.670262 ms for 100 iterations
+Claude executed in an average of 13.140508 ms for 100 iterations
+Perplexity executed in an average of 34.652039 ms for 100 iterations

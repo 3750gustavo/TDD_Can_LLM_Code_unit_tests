@@ -1,0 +1,50 @@
+Best class that fits for ChatGPT: Linear: time = 0.015 + 3.8E-05*n (sec)
+Constant: time = 1.9 (sec): 15.014770111361349
+Linear: time = 0.015 + 3.8E-05*n (sec): 0.004098668323849951
+Quadratic: time = 0.69 + 3.6E-10*n^2 (sec): 1.1503533366951477
+Cubic: time = 0.99 + 3.4E-15*n^3 (sec): 2.6962525043038403
+Polynomial: time = 5.4E-05 * x^0.97 (sec): 0.008144508158240246
+Logarithmic: time = -2.9 + 0.48*log(n) (sec): 6.243256574787755
+Linearithmic: time = 0.11 + 3.3E-06*n*log(n) (sec): 0.028525497490358136
+Exponential: time = 0.1 * 1^n (sec): 41.43240472840656
+--------------------------------------------------------------------------------
+Best class that fits for CodeLLama: Linear: time = 0.0068 + 3.9E-05*n (sec)
+Constant: time = 2 (sec): 15.545917962427747
+Linear: time = 0.0068 + 3.9E-05*n (sec): 0.0013015012949157585
+Quadratic: time = 0.69 + 3.6E-10*n^2 (sec): 1.1411182901743209
+Cubic: time = 1 + 3.5E-15*n^3 (sec): 2.719618421076729
+Polynomial: time = 4.3E-05 * x^0.99 (sec): 0.001345429272760463
+Logarithmic: time = -3 + 0.49*log(n) (sec): 6.510259279426313
+Linearithmic: time = 0.1 + 3.4E-06*n*log(n) (sec): 0.0210629833514731
+Exponential: time = 0.098 * 1^n (sec): 45.47114734722952
+--------------------------------------------------------------------------------
+Best class that fits for Copilot: Linear: time = -0.059 + 0.00017*n (sec)
+Constant: time = 8.6 (sec): 305.4978524843973
+Linear: time = -0.059 + 0.00017*n (sec): 0.15190984881339042
+Quadratic: time = 2.9 + 1.6E-09*n^2 (sec): 20.034469150541046
+Cubic: time = 4.3 + 1.5E-14*n^3 (sec): 49.424028081877594
+Polynomial: time = 0.00023 * x^0.97 (sec): 0.6235460307409564
+Logarithmic: time = -13 + 2.1*log(n) (sec): 130.4085000465473
+Linearithmic: time = 0.36 + 1.5E-05*n*log(n) (sec): 0.2746514435428445
+Exponential: time = 0.45 * 1^n (sec): 810.4993127899303
+--------------------------------------------------------------------------------
+Best class that fits for Bard: Linear: time = 0.006 + 2E-05*n (sec)
+Constant: time = 1 (sec): 4.237935418734636
+Linear: time = 0.006 + 2E-05*n (sec): 0.007572445337388828
+Quadratic: time = 0.36 + 1.9E-10*n^2 (sec): 0.33656534190752696
+Cubic: time = 0.53 + 1.8E-15*n^3 (sec): 0.7726425819652086
+Polynomial: time = 0.00022 * x^0.78 (sec): 0.1839115597892606
+Logarithmic: time = -1.5 + 0.25*log(n) (sec): 1.7820879757276509
+Linearithmic: time = 0.056 + 1.8E-06*n*log(n) (sec): 0.014672451732600848
+Exponential: time = 0.084 * 1^n (sec): 6.213396472813818
+--------------------------------------------------------------------------------
+Best class that fits for Claude: Linear: time = -0.079 + 0.00018*n (sec)
+Constant: time = 8.7 (sec): 314.8648470836217
+Linear: time = -0.079 + 0.00018*n (sec): 0.07144169279454136
+Quadratic: time = 3 + 1.6E-09*n^2 (sec): 21.800860602223615
+Cubic: time = 4.4 + 1.6E-14*n^3 (sec): 53.500901065036295
+Polynomial: time = 0.00023 * x^0.97 (sec): 0.5886903361011618
+Logarithmic: time = -13 + 2.2*log(n) (sec): 134.57081148180703
+Linearithmic: time = 0.35 + 1.5E-05*n*log(n) (sec): 0.2655731158548455
+Exponential: time = 0.45 * 1^n (sec): 855.2369847448646
+--------------------------------------------------------------------------------
