@@ -1,39 +1,31 @@
--- Import the necessary modules
-local math = require("math")
+local math = require('math')
 
--- Function to calculate mean
-local function calculate_mean(list)
+function calculate_stats(list1, list2, list3)
+  local means = {}
+  local stddevs = {}
+  
+  for i, list in ipairs({list1, list2, list3}) do
     local sum = 0
-    for _, value in ipairs(list) do
-        sum = sum + value
+    for _, x in ipairs(list) do
+      sum = sum + x
     end
-    return sum / #list
+    local mn = sum / #list
+    table.insert(means, mn)
+    
+    local var = 0
+    for _, x in ipairs(list) do
+      var = var + (x - mn)^2 
+    end
+    local std = math.sqrt(var / #list)
+    table.insert(stddevs, std)
+  end
+  
+  return {
+    mean = means,
+    stddev = stddevs
+  }
 end
 
--- Function to calculate standard deviation
-local function calculate_stddev(list, mean)
-    local sum = 0
-    for _, value in ipairs(list) do
-        sum = sum + (value - mean) ^ 2
-    end
-    return math.sqrt(sum / #list)
-end
-
--- Main function to calculate stats
-local function calculate_stats(list1, list2, list3)
-    local stats = {}
-    stats.mean = {
-        calculate_mean(list1),
-        calculate_mean(list2),
-        calculate_mean(list3)
-    }
-    stats.stddev = {
-        calculate_stddev(list1, stats.mean[1]),
-        calculate_stddev(list2, stats.mean[2]),
-        calculate_stddev(list3, stats.mean[3])
-    }
-    return stats
-end
 -- Test cases implemented and working:
 local list1 = {10,9,11,10,8,12,11,9,10,11}
 local list2 = {3,9,11,10,8,12,11,9,10,23}
@@ -83,6 +75,4 @@ else
 end
 
 -- To run this code, you can use the following command:
--- lua "Unit_tests_lua\EX-04-Calculate_stats\Test_files\Copilot_test.lua"
-    
-return calculate_stats
+-- lua Unit_tests_lua/EX-04-Calculate_stats/Test_files/Claude_test.lua
