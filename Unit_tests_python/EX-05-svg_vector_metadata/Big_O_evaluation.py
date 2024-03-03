@@ -11,6 +11,7 @@ def main():
 
     for impl, name in config.implementations:
         run_big_o(impl, name, results_file_path)
+    print(f"Results saved in {results_file_path}")
 
 if __name__ == "__main__":
     main()
