@@ -10,7 +10,7 @@ def main():
     reset_file(results_file_path)
 
     for impl, name in config.implementations:
-        run_big_o(impl, name, results_file_path, config.list1, config.list2, config.list3)
+        run_big_o(impl, name, results_file_path)
 
 if __name__ == "__main__":
     main()
