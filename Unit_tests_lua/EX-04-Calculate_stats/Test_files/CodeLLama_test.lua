@@ -68,5 +68,31 @@ else
     end
 end
 
+-- Performance related tests:
+
+-- warm up the function to get a more accurate performance benchmark
+    for i=1,1000 do
+        calculate_stats(list1, list2, list3)
+    end
+    -- avg performance benchmark for 100k iterations (in milliseconds)
+    -- execute the performance test 5 times to be sure and avg the averages
+    local results = {}
+    for j=1,5 do
+        local start = os.clock()
+        for i=1,100000 do
+            calculate_stats(list1, list2, list3)
+        end
+        local elapsed = os.clock() - start
+        local avg = elapsed * 1000 / 100000
+        table.insert(results, avg)
+    end
+    -- calculate the average of the averages
+    local avg = 0
+    for i, v in ipairs(results) do
+        avg = avg + v
+    end
+    avg = avg / #results
+    print("Average time for 100k iterations: " .. avg .. "ms")
+
 -- To run this code, you can use the following command:
 -- lua "Unit_tests_lua/EX-04-Calculate_stats/Test_files/CodeLLama_test.lua"
