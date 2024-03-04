@@ -96,32 +96,38 @@ local input_string = [[toward it, and then stopped.
   
   “That’s okay,” the other guy said. He tipped his baseball cap back on his head. “I'll do it.” ]]
 
+local first_6_words = {"the", "i", "and", "it", "of", "was"}
+local valid_7th8th_words = {"a", "in"} -- any order
+local valid_9th10th_words = {"that", "ollie", "said"} -- any order
+
+local function any_order_equal(word_to_check, expected_words_list)
+    -- Check if the word is in the list of expected words
+    for _, word in ipairs(expected_words_list) do
+        if word == word_to_check then
+            return true
+        end
+    end
+    return false
+  end
+
+-- Function to print test results
+local function printTestResults(...)
+    local checks = {...}
+    for i, check in ipairs(checks) do
+        if check then
+            print("Test passed for check " .. i)
+        else
+            print("Test failed for check " .. i)
+        end
+    end
+end
 -- Tests
 local top_words = zipfs_law(input_string)
-local expected_first_six_words = {
-  "the",
-  "i",
-  "and",
-  "it",
-  "of",
-  "was"
-}
--- accept any order
-local expected_7th8th_words = {
-  "a",
-  "in"
-}
--- any order
-local expected_9th10th_words = {
-  "that",
-  "ollie",
-  "said"
-}
 local first_six_words_passed = true
 local seventh_eighth_words_passed = true
 local ninth_tenth_words_passed = true
 
-function any_order_equal(word_to_check, expected_words_list)
+local function any_order_equal(word_to_check, expected_words_list)
   -- Check if the word is in the list of expected words
   for _, word in ipairs(expected_words_list) do
       if word == word_to_check then
@@ -132,23 +138,24 @@ function any_order_equal(word_to_check, expected_words_list)
 end
 
 for i, word in ipairs(top_words) do
+  print(i .. ". " .. word)
   if i <= 6 then
-      if word ~= expected_first_six_words[i] then
-          print("Test failed for word at index " .. i .. " - Expected: " .. expected_first_six_words[i] .. ", Got: " .. word)
+      if word ~= first_6_words[i] then
+          print("Test failed for word at index " .. i .. " - Expected: " .. first_6_words[i] .. ", Got: " .. word)
           first_six_words_passed = false
           -- Stop testing the first six words
           i = 7
       end
   elseif i <= 8 then
-      if not any_order_equal(word, expected_7th8th_words) then
-          print("Test failed for word at index " .. i .. " - Expected: " .. expected_7th8th_words[1] .. " or " .. expected_7th8th_words[2] .. ", Got: " .. word)
+      if not any_order_equal(word,valid_7th8th_words) then
+          print("Test failed for word at index " .. i .. " - Expected: " .. valid_7th8th_words[1] .. " or " .. valid_7th8th_words[2] .. ", Got: " .. word)
           seventh_eighth_words_passed = false
           -- Stop testing the 7th and 8th words
           i = 9
       end
   else
-      if not any_order_equal(word, expected_9th10th_words) then
-          print("Test failed for word at index " .. i .. " - Expected: " .. expected_9th10th_words[1] .. " or " .. expected_9th10th_words[2] .. ", Got: " .. word)
+      if not any_order_equal(word,valid_9th10th_words) then
+          print("Test failed for word at index " .. i .. " - Expected: " .. valid_9th10th_words[1] .. " or " .. valid_9th10th_words[2] .. ", Got: " .. word)
           ninth_tenth_words_passed = false
           -- Stop testing the 9th and 10th words
           i = 11
@@ -156,22 +163,27 @@ for i, word in ipairs(top_words) do
   end
 end
 
--- Print test results
-if first_six_words_passed then
-  print("Test passed for first six words")
-else
-  print("Test failed for first six words")
+-- Function to print test results
+function printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
+  if first_six_words_passed then
+    print("Test passed for first six words")
+  else
+    print("Test failed for first six words")
+  end
+  if seventh_eighth_words_passed then
+    print("Test passed for 7th and 8th words")
+  else
+    print("Test failed for 7th and 8th words")
+  end
+  if ninth_tenth_words_passed then
+    print("Test passed for 9th and 10th words")
+  else
+    print("Test failed for 9th and 10th words")
+  end
 end
-if seventh_eighth_words_passed then
-  print("Test passed for 7th and 8th words")
-else
-  print("Test failed for 7th and 8th words")
-end
-if ninth_tenth_words_passed then
-  print("Test passed for 9th and 10th words")
-else
-  print("Test failed for 9th and 10th words")
-end
+
+-- Call the function with the test results
+printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
 
 -- To run this code, you can use the following command:
 -- lua "Unit_tests_lua\EX-03-zipf_law\tests\Claude_test.lua"

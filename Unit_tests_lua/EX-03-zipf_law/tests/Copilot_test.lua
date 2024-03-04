@@ -1,37 +1,38 @@
-function zipfs_law(input_string)
+function zipfs_law(str)
     -- Remove punctuation and convert to lowercase
-    local cleaned_string = input_string:gsub("[%p%c%s]+", " "):lower()
+    str = str:gsub("[%p%c%s]", ""):lower()
     
-    -- Create a table to count word frequencies
-    local word_count = {}
+    -- Create a table to store word frequencies
+    local frequencies = {}
     
-    -- Iterate through each word in the cleaned string
-    for word in cleaned_string:gmatch("%S+") do
-        -- Increment word count in the table
-        word_count[word] = (word_count[word] or 0) + 1
+    -- Iterate over each word in the string
+    for word in str:gmatch("%w+") do
+        -- Increment the frequency count for the word
+        frequencies[word] = (frequencies[word] or 0) + 1
     end
     
-    -- Create a list of words and their frequencies
-    local word_list = {}
-    for word, count in pairs(word_count) do
-        table.insert(word_list, {word = word, count = count})
-    end
+    -- Create a table to store the top 10 words
+    local top_words = {}
     
-    -- Sort the list by word frequency in descending order
-    table.sort(word_list, function(a, b) return a.count > b.count end)
+    -- Sort the words by frequency in descending order
+    for word, frequency in pairs(frequencies) do
+        table.insert(top_words, {word = word, frequency = frequency})
+    end
+    table.sort(top_words, function(a, b) return a.frequency > b.frequency end)
     
     -- Extract the top 10 words
-    local top_words = {}
-    for i = 1, math.min(10, #word_list) do
-        table.insert(top_words, word_list[i].word)
+    local result = {}
+    for i = 1, math.min(#top_words, 10) do
+        table.insert(result, top_words[i].word)
     end
     
-    -- Return the list of top 10 words
-    return top_words
+    return result
 end
 
--- Test cases implemented
-local input_string = [[toward it, and then stopped.
+-- Define the local config table
+local config = {}
+
+config.string_input = [[toward it, and then stopped.
 
     There was a sound. A soft sliding sound. It stopped, then started again with a stealthy little bump. Everything inside me went loose. I regressed magically to four years of age. That sound wasn’t coming from the market. It was coming from behind me. From outside. Where the mist was. Something that was slipping and sliding and scraping over the cinderblocks. And, maybe, looking for a way in.
     
@@ -96,33 +97,33 @@ local input_string = [[toward it, and then stopped.
     't think it would be wise for—”
     
     “That’s okay,” the other guy said. He tipped his baseball cap back on his head. “I'll do it.” ]]
-  
-  -- Tests
-  local top_words = zipfs_law(input_string)
-  local expected_first_six_words = {
-    "the",
-    "i",
-    "and",
-    "it",
-    "of",
-    "was"
-  }
-  -- accept any order
-  local expected_7th8th_words = {
-    "a",
-    "in"
-  }
-  -- any order
-  local expected_9th10th_words = {
-    "that",
-    "ollie",
-    "said"
-  }
-  local first_six_words_passed = true
-  local seventh_eighth_words_passed = true
-  local ninth_tenth_words_passed = true
-  
-  function any_order_equal(word_to_check, expected_words_list)
+
+config.first_6_words = {"the", "i", "and", "it", "of", "was"}
+config.valid_7th8th_words = {"a", "in"} -- any order
+config.valid_9th10th_words = {"that", "ollie", "said"} -- any order
+
+-- Function to retrieve the input text
+function config.get_string_input()
+    return config.string_input
+end
+
+-- Define the function to generate a random string
+function config.generate_random_string(n)
+    local random_string = ""
+    local characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for i = 1, n do
+        local rand_index = math.random(#characters)
+        random_string = random_string .. string.sub(characters, rand_index, rand_index)
+    end
+    return random_string
+end
+
+-- Define the function to generate a random string using text_generator
+function config.text_generator()
+    return config.generate_random_string
+end
+
+function config.any_order_equal(word_to_check, expected_words_list)
     -- Check if the word is in the list of expected words
     for _, word in ipairs(expected_words_list) do
         if word == word_to_check then
@@ -130,50 +131,62 @@ local input_string = [[toward it, and then stopped.
         end
     end
     return false
-  end
-  
-  for i, word in ipairs(top_words) do
-    print(i .. ". " .. word)
+end
+
+-- Test cases implemented
+local input_text = config.get_string_input()
+local top_words = zipfs_law(input_text)
+-- variables to check if the test passed
+local first_six_words_passed = true
+local seventh_eighth_words_passed = true
+local ninth_tenth_words_passed = true
+
+for i, word in ipairs(top_words) do
     if i <= 6 then
-        if word ~= expected_first_six_words[i] then
-            print("Test failed for word at index " .. i .. " - Expected: " .. expected_first_six_words[i] .. ", Got: " .. word)
+        if word ~= config.first_6_words[i] then
+            print("Test failed for word at index " .. i .. " - Expected: " .. config.first_6_words[i] .. ", Got: " .. word)
             first_six_words_passed = false
             -- Stop testing the first six words
             i = 7
         end
     elseif i <= 8 then
-        if not any_order_equal(word, expected_7th8th_words) then
-            print("Test failed for word at index " .. i .. " - Expected: " .. expected_7th8th_words[1] .. " or " .. expected_7th8th_words[2] .. ", Got: " .. word)
+        if not config.any_order_equal(word, config.valid_7th8th_words) then
+            print("Test failed for word at index " .. i .. " - Expected: " .. config.valid_7th8th_words[1] .. " or " .. config.valid_7th8th_words[2] .. ", Got: " .. word)
             seventh_eighth_words_passed = false
             -- Stop testing the 7th and 8th words
             i = 9
         end
     else
-        if not any_order_equal(word, expected_9th10th_words) then
-            print("Test failed for word at index " .. i .. " - Expected: " .. expected_9th10th_words[1] .. " or " .. expected_9th10th_words[2] .. ", Got: " .. word)
+        if not config.any_order_equal(word, config.valid_9th10th_words) then
+            print("Test failed for word at index " .. i .. " - Expected: " .. config.valid_9th10th_words[1] .. " or " .. config.valid_9th10th_words[2] .. ", Got: " .. word)
             ninth_tenth_words_passed = false
             -- Stop testing the 9th and 10th words
             i = 11
         end
     end
   end
-  
-  -- Print test results
-  if first_six_words_passed then
-    print("Test passed for first six words")
-  else
-    print("Test failed for first six words")
-  end
-  if seventh_eighth_words_passed then
-    print("Test passed for 7th and 8th words")
-  else
-    print("Test failed for 7th and 8th words")
-  end
-  if ninth_tenth_words_passed then
-    print("Test passed for 9th and 10th words")
-  else
-    print("Test failed for 9th and 10th words")
-  end
-  
-  -- To run this code, you can use the following command:
-  -- lua "Unit_tests_lua\EX-03-zipf_law\tests\ChatGPT_test.lua"
+
+-- Function to print test results
+function printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
+    if first_six_words_passed then
+        print("Test passed for first six words")
+    else
+        print("Test failed for first six words")
+    end
+    if seventh_eighth_words_passed then
+        print("Test passed for 7th and 8th words")
+    else
+        print("Test failed for 7th and 8th words")
+    end
+    if ninth_tenth_words_passed then
+        print("Test passed for 9th and 10th words")
+    else
+        print("Test failed for 9th and 10th words")
+    end
+end
+
+-- Call the function with the test results
+printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
+
+-- To run this code, you can use the following command:
+-- lua "Unit_tests_lua\EX-03-zipf_law\tests\Copilot_test.lua"
