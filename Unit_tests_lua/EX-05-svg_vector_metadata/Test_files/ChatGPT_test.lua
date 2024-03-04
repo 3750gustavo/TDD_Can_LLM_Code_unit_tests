@@ -39,6 +39,22 @@ function svg_dot_product(svg_path)
     
     return dot_product
 end
--- TODO: Add test cases
-local result = svg_dot_product("path/to/svg_file.svg")
-print(result)
+
+-- Test
+local svg_path = [[F:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_lua\EX-05-svg_vector_metadata\Test_files\test.svg]]
+-- checks if the svg_path is actualy pointing to a .svg file
+if not svg_path:match("%.svg$") then
+    print("Something went wrong, the path is not pointing to a .svg file")
+end
+
+local dot_product = svg_dot_product(svg_path)
+
+-- Check if dot_product is 32
+if dot_product == 32 then
+    print("Test passed")
+else
+    print("Test failed" .. " - Expected: " .. 32 .. ", Got: " .. dot_product)
+end
+
+-- To run this code, you can use the following command:
+-- lua "Unit_tests_lua\EX-05-svg_vector_metadata\Test_files\ChatGPT_test.lua"
