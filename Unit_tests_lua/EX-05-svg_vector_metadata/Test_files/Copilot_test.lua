@@ -1,42 +1,32 @@
 function svg_dot_product(svg_path)
-    local f = io.open(svg_path, "r")
-    if not f then
-        return -1 -- Failed to open file
+    local file = io.open(svg_path, "r")
+    if not file then
+        return -1
     end
     
-    local content = f:read("*all")
-    f:close()
-    
-    -- Extract vectors from metadata
-    local vector1, vector2 = content:match("<metadata>.-<vector>(.-)</vector>.-<vector>(.-)</vector>.-</metadata>")
-    
-    -- Check if both vectors were found
-    if not vector1 or not vector2 then
-        return -1 -- Less than two vectors found
+    local metadata = ""
+    for line in file:lines() do
+        if line:find("<metadata>") then
+            metadata = line
+            break
+        end
     end
     
-    -- Parse vectors into tables
-    local vec1 = {}
-    for num in vector1:gmatch("[^,]+") do
-        table.insert(vec1, tonumber(num))
+    file:close()
+    
+    local vectors = {}
+    for vector in metadata:gmatch("<vector>(.-)</vector>") do
+        local x, y, z = vector:match("([^,]+),([^,]+),([^,]+)")
+        if x and y and z then
+            table.insert(vectors, {x = tonumber(x), y = tonumber(y), z = tonumber(z)})
+        end
     end
     
-    local vec2 = {}
-    for num in vector2:gmatch("[^,]+") do
-        table.insert(vec2, tonumber(num))
+    if #vectors < 2 then
+        return -1
     end
     
-    -- Check if vectors have three components
-    if #vec1 ~= 3 or #vec2 ~= 3 then
-        return -1 -- Vectors cannot be parsed
-    end
-    
-    -- Compute dot product
-    local dot_product = 0
-    for i = 1, 3 do
-        dot_product = dot_product + vec1[i] * vec2[i]
-    end
-    
+    local dot_product = vectors[1].x * vectors[2].x + vectors[1].y * vectors[2].y + vectors[1].z * vectors[2].z
     return dot_product
 end
 
@@ -66,4 +56,4 @@ end
     assertTestResult("Working SVG test", 32, dotProductTest)
 
 -- To run this code, you can use the following command:
--- lua "Unit_tests_lua\EX-05-svg_vector_metadata\Test_files\ChatGPT_test.lua"
+-- lua "Unit_tests_lua\EX-05-svg_vector_metadata\Test_files\Copilot_test.lua"
