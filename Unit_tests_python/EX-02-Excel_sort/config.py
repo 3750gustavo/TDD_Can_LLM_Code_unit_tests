@@ -1,4 +1,4 @@
-import random, string, os,tempfile, pandas as pd,string
+import random, string, os, pandas as pd,string, tempfile, big_o
 from ChatGPT import excel_sort as ChatGPT
 from CodeLLama import excel_sort as CodeLLama
 from Bard import excel_sort as Bard
@@ -37,11 +37,15 @@ def generate_random_dataframe(rows=100, columns=5):
 
 def dataframe_generator():
     '''Big O generator for generating dataframes with lambda with n rows and 5 columns and returning its path'''
-    df = generate_random_dataframe(lambda n: n, 5)
-    with tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False) as temp_file:
-        temp_file_path = temp_file.name
-        df.to_excel(temp_file_path, index=False)
-    return temp_file_path
+    def generate(n):
+        df = generate_random_dataframe(n)
+        file_path = os.path.join(os.path.dirname(__file__), 'temp.xlsx')
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        df.to_excel(file_path, index=False)
+        print(f"Generated file with {n} rows")
+        return file_path
+    return lambda n: generate(n)
 
 def generate_random_excel_file(rows=100, columns=5):
     '''Generate a random Excel file with the given number of rows and columns for testing.'''
@@ -49,8 +53,9 @@ def generate_random_excel_file(rows=100, columns=5):
     df = generate_random_dataframe(rows, columns)
 
     # Save the DataFrame as an Excel file
-    with tempfile.NamedTemporaryFile(suffix=".xlsx", delete=False) as temp_file:
-        temp_file_path = temp_file.name
-        df.to_excel(temp_file_path, index=False)
+    file_path = os.path.join(os.path.dirname(__file__), f'temp_{rows}.xlsx')
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    df.to_excel(file_path, index=False)
 
-    return temp_file_path
+    return file_path

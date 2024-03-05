@@ -18,7 +18,8 @@ def run_big_o(implementation, name, results_file_path):
         data_generator = config.dataframe_generator()
         column_index = 0
         # uses a wrapper function that calls implementation and keeps second argument fixed at 0
-        best,others = big_o.big_o(lambda arr:implementation(arr, column_index), data_generator=data_generator, n_repeats=1000)
+        excel_file_path = os.path.join(os.path.dirname(__file__), 'temp.xlsx')
+        best,others = big_o.big_o(lambda arr:implementation(excel_file_path, column_index), data_generator=data_generator,min_n=100, max_n=10000, n_repeats=20)
         with open(results_file_path, 'a') as file:
             print(f'Best class that fits for {name}: {best}')
             file.write(f'Best class that fits for {name}: {best}\n')
