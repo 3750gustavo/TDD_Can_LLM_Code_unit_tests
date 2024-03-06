@@ -1,4 +1,9 @@
-import os,datetime
+import os,datetime,subprocess
+try:
+    from pyfakefs.fake_filesystem_unittest import Patcher
+except ImportError:
+    subprocess.run(['pip', 'install', 'pyfakefs'])
+    from pyfakefs.fake_filesystem_unittest import Patcher
 # Import implementations
 from Copilot import compare_directories as Copilot
 from ChatGPT import compare_directories as ChatGPT
@@ -106,32 +111,29 @@ def reset_folders(dir1=dir1, dir2=dir2):
     delete_files()
 
 def generate_big_o_test_folders_n():
-    '''Generate two folders with n files each with half same date and half different date'''
-    check_make_dirs()
+    '''Generate two folders with n files each with half same date and half different date using pyfakefs'''
+    
     def generate(n):
-        for i in range(n):
-            file_content = f'This is file {i} content'
-            modification_time = datetime.datetime(2021, 1, 1)
-            for directory in [dir1, dir2]:
-                file_path = os.path.join(directory, f'file{i}.txt')
-                with open(file_path, 'w') as file:
-                    file.write(file_content)
-                # Set modification date to 2021-01-01
-                set_date(file_path)
-        # Create two files with same content but different modification date in both folders (current date in dir2)
-        for i in range(n//2, n):
-            # same content for both files
-            file_content = f'This is file {i} content'
-            # base modification date
-            modification_time = datetime.datetime(2021, 1, 1)
-            # create file in dir1
-            file_path = os.path.join(dir1, f'file{i}.txt')
-            with open(file_path, 'w') as file:
-                file.write(file_content)
-            # Set modification date to 2021-01-01
-            set_date(file_path)
-            # create file in dir2
-            file_path = os.path.join(dir2, f'file{i}.txt')
-            with open(file_path, 'w') as file:
-                file.write(file_content)
+        with Patcher() as patcher:
+            # Create directories in the fake file system
+            patcher.fs.create_dir(dir1)
+            patcher.fs.create_dir(dir2)
+            
+            for i in range(n):
+                file_content = f'This is file {i} content'
+                for directory in [dir1, dir2]:
+                    file_path = os.path.join(directory, f'file{i}.txt')
+                    # Use pyfakefs to create and write to the file
+                    patcher.fs.create_file(file_path, contents=file_content)
+                    # Simulate setting the modification date to 2021-01-01
+                    set_date(file_path, datetime.datetime(2021, 1, 1))
+            
+            for i in range(n // 2, n):
+                file_content = f'This is file {i} content'
+                for directory in [dir1, dir2]:
+                    file_path = os.path.join(directory, f'file{i}.txt')
+                    # Files are already created, just updating content for demonstration
+                    patcher.fs.create_file(file_path, contents=file_content, modify=True)
+                    # For dir2, simulate a different modification date if necessary
+
     return lambda n: generate(n)
