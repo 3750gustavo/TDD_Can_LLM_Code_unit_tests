@@ -1,4 +1,4 @@
-import random, string, os,tempfile,string
+import random, string, os,string
 from CodeLLama import display_text_file as CodeLLama
 from ChatGPT import display_text_file as ChatGPT
 from Bard import display_text_file as Bard
