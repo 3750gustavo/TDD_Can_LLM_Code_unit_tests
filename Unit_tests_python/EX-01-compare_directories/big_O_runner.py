@@ -17,7 +17,7 @@ def run_big_o(implementation, name, results_file_path):
     try:
         data_generator = config.generate_big_o_test_folders_n()
         dir1, dir2 = config.get_folders_paths()
-        best,others = big_o.big_o(lambda arr:implementation(dir1,dir2), data_generator=data_generator,min_n=100, max_n=10000, n_repeats=20)
+        best,others = big_o.big_o(lambda arr:implementation(dir1,dir2), data_generator=data_generator,min_n=100, max_n=4000, n_repeats=20)
         with open(results_file_path, 'a') as file:
             print(f'Best class that fits for {name}: {best}')
             file.write(f'Best class that fits for {name}: {best}\n')

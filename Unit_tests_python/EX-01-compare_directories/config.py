@@ -128,12 +128,16 @@ def generate_big_o_test_folders_n():
                     # Simulate setting the modification date to 2021-01-01
                     set_date(file_path, datetime.datetime(2021, 1, 1))
             
+            # To modify an existing file's content or properties, you just need to write to it again
             for i in range(n // 2, n):
-                file_content = f'This is file {i} content'
+                file_content = f'This is updated file {i} content'
                 for directory in [dir1, dir2]:
                     file_path = os.path.join(directory, f'file{i}.txt')
-                    # Files are already created, just updating content for demonstration
-                    patcher.fs.create_file(file_path, contents=file_content, modify=True)
-                    # For dir2, simulate a different modification date if necessary
+                    # Open the file in write mode ('w') to update its contents
+                    with open(file_path, 'w') as file:
+                        file.write(file_content)
+                    # Example: Update modification date if required
+                    # set_date(file_path, datetime.datetime.now())
+            print(f'Generated {n} files in each folder')
 
     return lambda n: generate(n)
