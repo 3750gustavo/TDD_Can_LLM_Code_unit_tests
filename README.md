@@ -1,6 +1,6 @@
 # TDD_Can_LLM_Code_unit_tests Repository Overview
 
-This repository is dedicated to exploring and testing the capabilities of Language Learning Models (LLMs) in coding, particularly focusing on unit testing and statistical analysis implementations in Lua and Python. Our goal is to leverage LLMs to improve code quality and efficiency.
+This repository is dedicated to exploring and testing the capabilities of Large Language Models (LLMs) in coding, particularly focusing on unit testing and statistical analysis implementations in Lua and Python. Our goal is to leverage LLMs to improve code quality and efficiency.
 
 ## Getting Started
 
