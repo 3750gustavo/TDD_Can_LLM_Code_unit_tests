@@ -1,89 +1,72 @@
-function compare_directories(dir1, dir2)
-    local report = {
-      Passed = true,
-      Failed_Count = 0,
-      Failed_Tests = {},
-    }
-  
-    -- Check if both directories exist
-    if not io.dir(dir1) or not io.dir(dir2) then
-      report.Passed = false
-      report.Failed_Count = report.Failed_Count + 1
-      table.insert(report.Failed_Tests, {
-        Failed_Files = {"Both directories"},
-        Failure_Location = "N/A",
-      })
-      return report
-    end
-  
-    -- Helper function to compare file details
-    local function compare_files(file1, file2)
-      local stat1 = io.stat(dir1 .. "/" .. file1)
-      local stat2 = io.stat(dir2 .. "/" .. file2)
-  
-      -- Check if files exist
-      if not stat1 or not stat2 then
-        report.Passed = false
-        report.Failed_Count = report.Failed_Count + 1
-        table.insert(report.Failed_Tests, {
-          Failed_Files = {file1},
-          Failure_Location = stat1 and "dir2" or "dir1",
-        })
-        return
-      end
-  
-      -- Check file content
-      if not io.open(dir1 .. "/" .. file1, "rb") or not io.open(dir2 .. "/" .. file2, "rb") then
-        report.Passed = false
-        report.Failed_Count = report.Failed_Count + 1
-        table.insert(report.Failed_Tests, {
-          Failed_Files = {file1},
-          Failure_Location = "Error reading file content",
-        })
-        return
-      end
-      local content1 = io.read("*a")
-      local content2 = io.read("*a")
-      io.close()
-      if content1 ~= content2 then
-        report.Passed = false
-        report.Failed_Count = report.Failed_Count + 1
-        table.insert(report.Failed_Tests, {
-          Failed_Files = {file1},
-          Failure_Location = "Content mismatch",
-        })
-      end
-  
-      -- Check file modification dates
-      if stat1.mtime ~= stat2.mtime then
-        local failure_location = stat1.mtime < stat2.mtime and "dir1" or "dir2"
-        report.Passed = false
-        report.Failed_Count = report.Failed_Count + 1
-        table.insert(report.Failed_Tests, {
-          Failed_Files = {file1},
-          Failure_Location = failure_location .. " has older modification date",
-        })
-      end
-    end
-  
-    -- Iterate over files in dir1
-    for filename in io.dir(dir1) do
-      if filename ~= "." and filename ~= ".." then
-        compare_files(filename, filename)
-      end
-    end
-  
-    return report
-  end
-
--- tests:
+-- setting up the LuaRocks paths before the import made by the original code
 
 -- Add LuaRocks paths
 local user = "gusta"
 package.path = package.path .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/share/lua/5.4/?.lua"
 package.cpath = package.cpath .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/lib/lua/5.4/?.dll"
 
-lfs = require("lfs")
+-- original ChatGPT code
+local lfs = require("lfs")
+
+-- Function to get last modified time of a file
+local function get_last_modified_time(file_path)
+    local attributes = lfs.attributes(file_path)
+    if attributes then
+        return attributes.modification
+    end
+    return nil
+end
+
+-- Function to compare two directories
+local function compare_directories(dir1, dir2)
+    local report = {
+        Passed = true,
+        Failed_Count = 0,
+        Failed_Tests = {}
+    }
+
+    -- Helper function to recursively traverse directories
+    local function traverse_directory(directory, base_dir)
+        for file in lfs.dir(directory) do
+            if file ~= "." and file ~= ".." then
+                local file_path = directory .. "/" .. file
+                local base_path = base_dir .. "/" .. file
+
+                if lfs.attributes(file_path, "mode") == "directory" then
+                    traverse_directory(file_path, base_path)
+                else
+                    local modified_time1 = get_last_modified_time(directory .. "/" .. file)
+                    local modified_time2 = get_last_modified_time(base_dir .. "/" .. file)
+
+                    if modified_time1 and modified_time2 then
+                        if modified_time1 < modified_time2 then
+                            table.insert(report.Failed_Tests, {
+                                Failed_Files = {file},
+                                Failure_Location = "dir1"
+                            })
+                            report.Passed = false
+                            report.Failed_Count = report.Failed_Count + 1
+                        elseif modified_time1 > modified_time2 then
+                            table.insert(report.Failed_Tests, {
+                                Failed_Files = {file},
+                                Failure_Location = "dir2"
+                            })
+                            report.Passed = false
+                            report.Failed_Count = report.Failed_Count + 1
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    traverse_directory(dir1, dir2)
+    traverse_directory(dir2, dir1)
+
+    return report
+end
+-- end of original ChatGPT code
+
 -- tests:
 
 -- Test Setup: Create necessary directories and files for testing
@@ -281,4 +264,4 @@ print("Test Summary:\n------------\n" .. test1_summary .. "\n" .. test2_summary)
 -- Clean up the directories
 delete_files(dir1, dir2)
 -- to run this code, you can use the following command:
--- lua "Unit_tests_lua\EX-01-compare_directories\tests\Bard_test.lua"
+-- lua "Unit_tests_lua\EX-01-compare_directories\tests\ChatGPT_test.lua"
