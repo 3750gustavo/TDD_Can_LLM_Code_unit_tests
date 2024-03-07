@@ -1,0 +1,5 @@
+pytest
+pylint
+big_o
+pandas
+pyfakefs
