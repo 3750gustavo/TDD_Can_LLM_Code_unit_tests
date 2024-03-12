@@ -1,0 +1,47 @@
+Ex 01
+Bard 14 problems
+Chatgpt 0 problems
+Claude 15 problems
+codellama 1 problem
+copilot 3 problems
+perplexity 4 problems
+
+Ex 02
+Bard N/A
+Chatgpt 2 problems
+Claude 3 problems
+codellama 5 problems
+copilot 8 problems
+perplexity 7 problems
+
+Ex 03
+Bard 8 problems
+Chatgpt 8 problems
+Claude 6 problems
+codellama 7 problems
+copilot 7 problems
+perplexity 10 problems
+
+Ex 04
+Bard 1 problem
+Chatgpt 4 problems
+Claude 6 problems
+codellama 1 problem
+copilot 1 problem
+perplexity 1 problem
+
+Ex 05
+Bard 7 problems
+Chatgpt 9 problems
+Claude 5 problems
+codellama 10 problems
+copilot 6 problems
+perplexity 4 problems
+
+Ex 06
+Bard 10 problems
+Chatgpt 8 problems
+Claude 8 problems
+codellama 12 problems
+copilot 1 problems
+perplexity 22 problems
