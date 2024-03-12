@@ -1,0 +1,24 @@
+For column 1:
+     Name  Age           City
+5   Daffy   21        Phoenix
+4  Donald   22        Houston
+1   Jerry   21    Los Angeles
+2  Mickey   19  San Francisco
+3  Minnie   20        Chicago
+0     Tom   20       New York
+For column 2:
+     Name  Age           City
+2  Mickey   19  San Francisco
+0     Tom   20       New York
+3  Minnie   20        Chicago
+1   Jerry   21    Los Angeles
+5   Daffy   21        Phoenix
+4  Donald   22        Houston
+For column 3:
+     Name  Age           City
+3  Minnie   20        Chicago
+4  Donald   22        Houston
+1   Jerry   21    Los Angeles
+0     Tom   20       New York
+5   Daffy   21        Phoenix
+2  Mickey   19  San Francisco
