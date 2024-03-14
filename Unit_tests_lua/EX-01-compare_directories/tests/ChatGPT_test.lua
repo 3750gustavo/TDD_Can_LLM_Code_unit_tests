@@ -253,12 +253,12 @@ local function check_test_results(result, expected_result, implementation_name)
     end
 
 -- Example Test Execution
-local test1_summary = run_test(create_files_all_same_date, compare_directories, expected_result_all_same_date, "all_same_date")
-local test2_summary = run_test(create_files_with_differences, compare_directories, expected_result_with_differences, "with_differences")
-
-print("Test Summary:\n------------\n" .. test1_summary .. "\n" .. test2_summary)
 local dir1 , dir2 = TestSetup.GetDirectories()
-
+local test1_summary = run_test(create_files_all_same_date, compare_directories, expected_result_all_same_date, "all_same_date")
+delete_files(dir1, dir2)
+local test2_summary = run_test(create_files_with_differences, compare_directories, expected_result_with_differences, "with_differences")
+print("Test Summary:\n------------\n" .. test1_summary .. "\n" .. test2_summary)
+create_files_all_same_date(dir1, dir2)
 local function performanceTest()
     -- warmup
     for i = 1, 1000 do
