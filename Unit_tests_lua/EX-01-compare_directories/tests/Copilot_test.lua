@@ -52,7 +52,7 @@ local lfs = require("lfs")
 
 -- Test Setup: Create necessary directories and files for testing
 local TestSetup = {}
-directories = {dir1, dir2}
+
 function TestSetup.create_directory_if_not_exists(directory)
     if not lfs.attributes(directory, "mode") then
         lfs.mkdir(directory)
@@ -64,7 +64,6 @@ function TestSetup.set_date(file_path, date)
     local year, month, day, hour, min, sec = date:match("(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)")
     if year and month and day and hour and min and sec then
         local timestamp = os.time({year = year, month = month, day = day, hour = hour, min = min, sec = sec})
-
         -- Use the lfs.touch function to set the modification time
         local success, err = lfs.touch(file_path, timestamp)
         if not success then
@@ -103,16 +102,14 @@ function TestSetup.prepare_directories(current_dir)
     return dir1, dir2
 end
 
--- Test Execution
-local function run_test(create_files_func, compare_directories, expected_result, implementation_name)
+function TestSetup.GetDirectories()
     local current_dir = io.popen("cd"):read("*l")
     local dir1, dir2 = TestSetup.prepare_directories(current_dir)
-
-    create_files_func(dir1, dir2) -- Calls the passed function to create files
-
-    local result = compare_directories(dir1, dir2)
-    return check_test_results(result, expected_result, implementation_name)
+    return dir1, dir2
 end
+
+-- Test Execution
+
 local content = "This is file content"
 local modification_time_standard = "2021-01-01 00:00:00"
 -- Function to create files in the folders, all with the same modification dates of 2021-01-01
@@ -124,7 +121,6 @@ end
 
 -- Function to create files in the folders with some differences
 local function create_files_with_differences(dir1, dir2)
-    local filenames = {"file1.txt", "file2.txt", "file3.txt", "file4.txt", "file5.txt"}
     -- Create the files 1 and 4 with the same content and modification date in both folders
     TestSetup.create_files(dir1, {"file1.txt", "file4.txt"}, content, modification_time_standard)
     TestSetup.create_files(dir2, {"file1.txt", "file4.txt"}, content, modification_time_standard)
@@ -136,7 +132,7 @@ local function create_files_with_differences(dir1, dir2)
     TestSetup.create_files(dir2, {"file5.txt"}, content, current_time)
 end
 
-function delete_files(dir1, dir2)
+local function delete_files(dir1, dir2)
     -- Iterate through directories and delete files
     for _, directory in ipairs({dir1, dir2}) do
         for filename in lfs.dir(directory) do
@@ -148,15 +144,16 @@ function delete_files(dir1, dir2)
     end
 end
 
+
 -- Expected result for the first test where all files have the same modification date
-expected_result_all_same_date = {
+local expected_result_all_same_date = {
   Passed = true,
   Failed_Count = 0,
   Failed_Tests = {}
 }
 
 -- Expected result for the test where three files differ, but only two of them are in both folders
-expected_result_with_differences = {
+local expected_result_with_differences = {
   Passed = false,
   Failed_Count = 2,
   Failed_Tests = {
@@ -168,9 +165,8 @@ expected_result_with_differences = {
 }
 
 -- Helper function to compare two tables (arrays) for the same elements regardless of order
-function compare_unordered_lists(list1, list2)
+local function compare_unordered_lists(list1, list2)
         if #list1 ~= #list2 then return false end
-    
         local count = {}
         for _, value in ipairs(list1) do
             count[value] = (count[value] or 0) + 1
@@ -183,7 +179,7 @@ function compare_unordered_lists(list1, list2)
         return true
     end
 
-function check_test_results(result, expected_result, implementation_name)
+local function check_test_results(result, expected_result, implementation_name)
         local string_result = "The test case with " .. implementation_name .. " has"
         local string_reasons_for_failures = "\nThe test failed because of the following reasons:"
         local passed = result["Passed"] == expected_result["Passed"]
@@ -194,7 +190,6 @@ function check_test_results(result, expected_result, implementation_name)
         if not failed_count_match then
             string_reasons_for_failures = string_reasons_for_failures .. "\nFailed_Count = " .. tostring(result["Failed_Count"]) .. " but expected " .. tostring(expected_result["Failed_Count"])
         end
-    
         local failed_tests_match = true
         if #expected_result["Failed_Tests"] > 0 then
             for i, failed_test in ipairs(expected_result["Failed_Tests"]) do
@@ -202,17 +197,13 @@ function check_test_results(result, expected_result, implementation_name)
                     local result_failed_test = result["Failed_Tests"][i]
                     local files_match = true
                     local location_match = true
-    
                     if failed_test["Failed_Files"] and result_failed_test["Failed_Files"] then
                         files_match = compare_unordered_lists(failed_test["Failed_Files"], result_failed_test["Failed_Files"])
                     end
-    
                     if failed_test["Failure_Location"] and result_failed_test["Failure_Location"] then
                         location_match = failed_test["Failure_Location"] == result_failed_test["Failure_Location"]
                     end
-    
                     failed_tests_match = files_match and location_match
-    
                     if not files_match or not location_match then
                         string_reasons_for_failures = string_reasons_for_failures .. "\nFailed_Tests[" .. i .. "] mismatch in either Failed_Files or Failure_Location."
                         break
@@ -226,7 +217,6 @@ function check_test_results(result, expected_result, implementation_name)
         else
             failed_tests_match = #result["Failed_Tests"] == 0
         end
-    
         if passed and failed_count_match and failed_tests_match then
             string_result = string_result .. " passed."
         else
@@ -235,12 +225,39 @@ function check_test_results(result, expected_result, implementation_name)
         return string_result
     end
 
+    local function run_test(create_files_func, compare_func, expected_result, implementation_name)
+        local current_dir = io.popen("cd"):read("*l")
+        local dir1, dir2 = TestSetup.prepare_directories(current_dir)
+        create_files_func(dir1, dir2) -- Calls the passed function to create files
+        local result = compare_func(dir1, dir2)
+        return check_test_results(result, expected_result, implementation_name)
+    end
+
 -- Example Test Execution
 local test1_summary = run_test(create_files_all_same_date, compare_directories, expected_result_all_same_date, "all_same_date")
 local test2_summary = run_test(create_files_with_differences, compare_directories, expected_result_with_differences, "with_differences")
 
 print("Test Summary:\n------------\n" .. test1_summary .. "\n" .. test2_summary)
+local dir1 , dir2 = TestSetup.GetDirectories()
 
+local function performanceTest()
+    -- warmup
+    for i = 1, 1000 do
+        -- Assume dir1 and dir2 are set up and contain the necessary test files
+        compare_directories(dir1, dir2)
+    end
+    local start_time = os.clock()
+    for i = 1, 1000 do
+        -- Assume dir1 and dir2 are set up and contain the necessary test files
+        compare_directories(dir1, dir2)
+    end
+    local end_time = os.clock()
+    local elapsed_time = (end_time - start_time) * 1000 -- Convert to milliseconds
+    local average_time = elapsed_time / 1000
+    print("Average execution time: " .. average_time .. " ms")
+end
+
+performanceTest()
 -- Clean up the directories
 delete_files(dir1, dir2)
 -- to run this code, you can use the following command:
