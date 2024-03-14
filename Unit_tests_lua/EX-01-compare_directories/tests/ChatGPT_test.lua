@@ -71,7 +71,7 @@ end
 
 -- Test Setup: Create necessary directories and files for testing
 local TestSetup = {}
-directories = {dir1, dir2}
+local directories = {dir1, dir2}
 function TestSetup.create_directory_if_not_exists(directory)
     if not lfs.attributes(directory, "mode") then
         lfs.mkdir(directory)
@@ -83,7 +83,6 @@ function TestSetup.set_date(file_path, date)
     local year, month, day, hour, min, sec = date:match("(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)")
     if year and month and day and hour and min and sec then
         local timestamp = os.time({year = year, month = month, day = day, hour = hour, min = min, sec = sec})
-
         -- Use the lfs.touch function to set the modification time
         local success, err = lfs.touch(file_path, timestamp)
         if not success then
@@ -126,11 +125,10 @@ end
 local function run_test(create_files_func, compare_directories, expected_result, implementation_name)
     local current_dir = io.popen("cd"):read("*l")
     local dir1, dir2 = TestSetup.prepare_directories(current_dir)
-
     create_files_func(dir1, dir2) -- Calls the passed function to create files
-
     local result = compare_directories(dir1, dir2)
     return check_test_results(result, expected_result, implementation_name)
+
 end
 local content = "This is file content"
 local modification_time_standard = "2021-01-01 00:00:00"
@@ -190,7 +188,6 @@ expected_result_with_differences = {
 -- Helper function to compare two tables (arrays) for the same elements regardless of order
 function compare_unordered_lists(list1, list2)
         if #list1 ~= #list2 then return false end
-    
         local count = {}
         for _, value in ipairs(list1) do
             count[value] = (count[value] or 0) + 1
@@ -214,7 +211,6 @@ function check_test_results(result, expected_result, implementation_name)
         if not failed_count_match then
             string_reasons_for_failures = string_reasons_for_failures .. "\nFailed_Count = " .. tostring(result["Failed_Count"]) .. " but expected " .. tostring(expected_result["Failed_Count"])
         end
-    
         local failed_tests_match = true
         if #expected_result["Failed_Tests"] > 0 then
             for i, failed_test in ipairs(expected_result["Failed_Tests"]) do
@@ -222,17 +218,13 @@ function check_test_results(result, expected_result, implementation_name)
                     local result_failed_test = result["Failed_Tests"][i]
                     local files_match = true
                     local location_match = true
-    
                     if failed_test["Failed_Files"] and result_failed_test["Failed_Files"] then
                         files_match = compare_unordered_lists(failed_test["Failed_Files"], result_failed_test["Failed_Files"])
                     end
-    
                     if failed_test["Failure_Location"] and result_failed_test["Failure_Location"] then
                         location_match = failed_test["Failure_Location"] == result_failed_test["Failure_Location"]
                     end
-    
                     failed_tests_match = files_match and location_match
-    
                     if not files_match or not location_match then
                         string_reasons_for_failures = string_reasons_for_failures .. "\nFailed_Tests[" .. i .. "] mismatch in either Failed_Files or Failure_Location."
                         break
@@ -246,7 +238,6 @@ function check_test_results(result, expected_result, implementation_name)
         else
             failed_tests_match = #result["Failed_Tests"] == 0
         end
-    
         if passed and failed_count_match and failed_tests_match then
             string_result = string_result .. " passed."
         else
