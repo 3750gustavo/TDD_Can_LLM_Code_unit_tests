@@ -45,3 +45,49 @@ Claude 8 problems
 codellama 12 problems
 copilot 1 problems
 perplexity 22 problems
+
+
+On average pylint deducts 1.11 per problem from the maximum score of 10.00 per problem, so the same logic will be applied for the luacheck linting:
+
+Bard:
+Ex 01: 0.00%
+Ex 02: N/A
+Ex 03: 11.2%
+Ex 04: 88.9%
+Ex 05: 22.3%
+Ex 06: 0.00%
+ChatGPT:
+Ex 01: 100.0%
+Ex 02: 77.8%
+Ex 03: 11.2%
+Ex 04: 55.6%
+Ex 05: 0.1% (rounded up from 0.0999% for readability)
+Ex 06: 11.2%
+Claude:
+Ex 01: 0.00%
+Ex 02: 66.7%
+Ex 03: 33.4%
+Ex 04: 33.4%
+Ex 05: 44.5%
+Ex 06: 11.2%
+codellama:
+Ex 01: 88.9%
+Ex 02: 44.5%
+Ex 03: 22.3%
+Ex 04: 88.9%
+Ex 05: 0.00%
+Ex 06: 0.00%
+copilot:
+Ex 01: 66.7%
+Ex 02: 11.2%
+Ex 03: 22.3%
+Ex 04: 88.9%
+Ex 05: 33.4%
+Ex 06: 88.9%
+perplexity:
+Ex 01: 55.6%
+Ex 02: 22.3%
+Ex 03: 0.00%
+Ex 04: 88.9%
+Ex 05: 55.6%
+Ex 06: 0.00%
