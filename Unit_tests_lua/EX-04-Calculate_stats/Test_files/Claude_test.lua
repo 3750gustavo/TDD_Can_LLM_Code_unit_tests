@@ -1,6 +1,6 @@
 local math = require('math')
 
-function calculate_stats(list1, list2, list3)
+local function calculate_stats(list1, list2, list3)
   local means = {}
   local stddevs = {}
   

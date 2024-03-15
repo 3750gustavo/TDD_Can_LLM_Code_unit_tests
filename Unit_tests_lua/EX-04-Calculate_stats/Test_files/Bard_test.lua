@@ -2,7 +2,7 @@
 local math = require("math")
 
 -- Function to calculate mean and standard deviation using population formula
-function calculate_stats(list1, list2, list3)
+local function calculate_stats(list1, list2, list3)
   -- Initialize variables for means and standard deviations
   local means = {}
   local stddevs = {}
