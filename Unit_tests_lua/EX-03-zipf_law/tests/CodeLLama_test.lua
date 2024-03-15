@@ -199,6 +199,7 @@ local function performance_test(input_string,size)
     return avg_time
   end
   
+  local input_string = config.get_string_input()
   -- Run the tests
   io.write("Do you want to run the performance test? (y/n): ")
   local run_performance_test = io.read()

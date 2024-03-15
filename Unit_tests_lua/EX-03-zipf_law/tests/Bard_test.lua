@@ -1,4 +1,4 @@
-function zipfs_law(text)
+local function zipfs_law(text)
     -- Remove punctuation and convert to lowercase
     local clean_text = string.gsub(text, "%p", "")
     clean_text = string.lower(clean_text)
@@ -163,7 +163,7 @@ for i, word in ipairs(top_words) do
 end
 
 -- Function to print test results
-function printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
+local function printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
   if first_six_words_passed then
     print("Test passed for first six words")
   else
@@ -183,6 +183,32 @@ end
 
 -- Call the function with the test results
 printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
+
+-- Performance section
+local function performance_test(input_string,size)
+  -- Warm-up
+  for i = 1, 100 do
+      zipfs_law(input_string)
+  end
+  -- Actual test
+  local start_time = os.clock()
+  for i = 1, size do
+      zipfs_law(input_string)
+  end
+  local end_time = os.clock()
+  -- Calculate average runtime in milliseconds
+  local total_time = (end_time - start_time) * 1000
+  local avg_time = total_time / size
+  return avg_time
+end
+
+local input_string = config.get_string_input()
+-- Run the tests
+io.write("Do you want to run the performance test? (y/n): ")
+local run_performance_test = io.read()
+if run_performance_test == "y" then
+    print("Performance test: ", performance_test(input_string,100000) .. " milliseconds")
+end
 
 -- To run this code, you can use the following command:
 -- lua "Unit_tests_lua\EX-03-zipf_law\tests\Bard_test.lua"
