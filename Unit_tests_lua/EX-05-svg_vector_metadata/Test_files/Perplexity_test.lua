@@ -1,4 +1,4 @@
-function svg_dot_product(svg_path)
+local function svg_dot_product(svg_path)
     -- Load the SVG file
     local f = io.open(svg_path, "r")
     local svg_content = f:read("*all")
@@ -62,6 +62,31 @@ assertTestResult("Unparsable SVG test", -1, dotProductUnparsable)
 local testSVGPath = [[F:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_lua\EX-05-svg_vector_metadata\Test_files\test.svg]]
 local dotProductTest = svg_dot_product(testSVGPath)
 assertTestResult("Working SVG test", 32, dotProductTest)
+
+-- Performance section
+local function performance_test(svg_path, size)
+  -- Warm-up
+  for i = 1, 100 do
+      svg_dot_product(svg_path)
+  end
+  -- Actual test
+  local start_time = os.clock()
+  for i = 1, size do
+      svg_dot_product(svg_path)
+  end
+  local end_time = os.clock()
+  -- Calculate average runtime in milliseconds
+  local total_time = (end_time - start_time) * 1000
+  local avg_time = total_time / size
+  return avg_time
+end
+
+-- Run the tests
+io.write("Do you want to run the performance test? (y/n): ")
+local run_performance_test = io.read()
+if run_performance_test == "y" then
+    print("Performance test: ", performance_test(testSVGPath, 100000) .. " milliseconds")
+end
 
 -- To run this code, you can use the following command:
 -- lua "F:\TFG\TDD_Can_LLM_Code_unit_tests\Unit_tests_lua\EX-05-svg_vector_metadata\Test_files\Perplexity_test.lua"
