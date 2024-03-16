@@ -1,42 +1,49 @@
 local function display_text_file(file_path)
-    local success, data = pcall(io.open, file_path)
-    if not success then
-      return false, nil, "Error opening file: " .. data
+    -- Check if file exists
+    local file = io.open(file_path, "r")
+    if not file then
+        print("Error: File does not exist.")
+        return false, nil
     end
-   
-    local lines = data:read("*all"):split("\n")
-    local pairs = {}
-   
-    for _, line in ipairs(lines) do
-      local name, value = line:match("([^:]+):([^:]+)")
-      if name and value then
-        table.insert(pairs, { name = name, value = tonumber(value) })
-      end
+    
+    -- Read content of the file
+    local content = file:read("*all")
+    file:close()
+    
+    -- Parse data into name-value pairs
+    local data = {}
+    for line in content:gmatch("[^\n]+") do
+        local name, value = line:match("([^:]+):([^:]+)")
+        if name and value then
+            table.insert(data, {name = name, value = tonumber(value)})
+        else
+            print("Error: Invalid data format.")
+            return false, nil
+        end
     end
-   
-    table.sort(pairs, function(a, b) return a.value > b.value end)
-   
-    local temp_file = io.open("test.txt", "w")
+    
+    -- Sort data in descending order based on 'value' key
+    table.sort(data, function(a, b) return a.value > b.value end)
+    
+    -- Write sorted data to temporary file
+    local temp_file_path = "test.txt"
+    local temp_file = io.open(temp_file_path, "w")
     if not temp_file then
-      data:close()
-      return false, nil, "Error creating temporary file."
+        print("Error: Could not create temporary file.")
+        return false, nil
     end
-   
-    for _, pair in ipairs(pairs) do
-      temp_file:write(pair.name .. ": " .. tostring(pair.value) .. "\n")
+    for _, entry in ipairs(data) do
+        temp_file:write(entry.name .. ":" .. entry.value .. "\n")
     end
-   
     temp_file:close()
-    data:close()
-   
-    -- Display the contents of the temporary file in a window GUI (replace with appropriate GUI calls)
-    -- local gui_library = require("your_gui_library")
-    -- gui_library.show_text_file("test.txt")
-   
-    return true, "test.txt"
-   end
+    
+    -- Display contents of temporary file in GUI window
+    -- GUI display code here...
+    
+    return true, temp_file_path
+end
 
-   -- Add LuaRocks paths
+-- Add LuaRocks paths
 local user = "gusta"
 package.path = package.path .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/share/lua/5.4/?.lua"
 package.cpath = package.cpath .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/lib/lua/5.4/?.dll"
@@ -169,4 +176,4 @@ if run_performance_test == "y" then
 end
 
 -- To run this code, you can use the following command:
--- lua "Unit_tests_lua\EX-06-display_text_file_gui\tests\Bard_test.lua"
+-- lua "Unit_tests_lua\EX-06-display_text_file_gui\tests\ChatGPT_test.lua"
