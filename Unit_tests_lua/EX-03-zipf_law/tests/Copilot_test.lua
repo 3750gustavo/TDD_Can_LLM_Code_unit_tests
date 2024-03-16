@@ -189,7 +189,7 @@ end
 printTestResults(first_six_words_passed, seventh_eighth_words_passed, ninth_tenth_words_passed)
 
 -- Performance section
-local function performance_test(input_string,size)
+local function performance_test(input_string, size)
     -- Warm-up
     for i = 1, 100 do
         zipfs_law(input_string)
@@ -204,15 +204,15 @@ local function performance_test(input_string,size)
     local total_time = (end_time - start_time) * 1000
     local avg_time = total_time / size
     return avg_time
-  end
+end
 
-  local input_string = config.get_string_input()
-  -- Run the tests
-  io.write("Do you want to run the performance test? (y/n): ")
-  local run_performance_test = io.read()
-  if run_performance_test == "y" then
-      print("Performance test: ", performance_test(input_string,100000) .. " milliseconds")
-  end
+local input_string = config.get_string_input()
+-- Run the tests
+io.write("Do you want to run the performance test? (y/n): ")
+local run_performance_test = io.read()
+if run_performance_test == "y" then
+    print("Performance test: ", performance_test(input_string, 100000) .. " milliseconds")
+end
 
 -- To run this code, you can use the following command:
 -- lua "Unit_tests_lua\EX-03-zipf_law\tests\Copilot_test.lua"

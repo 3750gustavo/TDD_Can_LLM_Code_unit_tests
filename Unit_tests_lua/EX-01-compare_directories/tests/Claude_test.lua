@@ -44,16 +44,8 @@ function compare_directories(dir1, dir2)
 -- Add LuaRocks paths
 local user = "gusta"
 package.path = package.path .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/share/lua/5.4/?.lua"
-package.cpath = package.cpath .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/lib/lua/5.4/?.dll" 
-local lfs = require("lfs")
--- tests:
-
--- Add LuaRocks paths
-local user = "gusta"
-package.path = package.path .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/share/lua/5.4/?.lua"
 package.cpath = package.cpath .. ";C:/Users/" .. user .. "/AppData/Roaming/luarocks/lib/lua/5.4/?.dll"
-
-lfs = require("lfs")
+local lfs = require("lfs")
 -- tests:
 
 -- Test Setup: Create necessary directories and files for testing
