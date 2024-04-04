@@ -1,4 +1,4 @@
-function excel_sort(file_path, column_index)
+local function excel_sort(file_path, column_index)
     -- Load the Excel file and extract the data
     local excel_data = load_excel_data(file_path)
     
