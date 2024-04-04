@@ -2,7 +2,7 @@
 local math = require("math")
 
 -- Define the function
-function calculate_stats(list1, list2, list3)
+local function calculate_stats(list1, list2, list3)
   -- Calculate the mean for each list
   local mean1 = math.mean(list1)
   local mean2 = math.mean(list2)
