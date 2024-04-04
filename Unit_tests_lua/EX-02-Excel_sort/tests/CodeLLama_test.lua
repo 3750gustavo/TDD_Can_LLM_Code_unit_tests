@@ -1,4 +1,4 @@
-function excel_sort(file_path, column_index)
+local function excel_sort(file_path, column_index)
     -- Load the Excel file
     local excel = require("luaxlsx")
     local workbook = excel.load(file_path)
