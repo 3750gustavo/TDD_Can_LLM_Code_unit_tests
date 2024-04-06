@@ -1,4 +1,4 @@
-function compare_directories(dir1, dir2)
+local function compare_directories(dir1, dir2)
 
     local report = {
       Passed = true,

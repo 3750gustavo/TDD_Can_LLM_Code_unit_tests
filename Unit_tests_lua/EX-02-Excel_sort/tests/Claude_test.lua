@@ -1,6 +1,6 @@
 local xlsx = require("xlsx")
 
-function excel_sort(filepath, column_index)
+local function excel_sort(filepath, column_index)
   local wb = xlsx.read(filepath)
   local ws = wb:sheet(1)
 
