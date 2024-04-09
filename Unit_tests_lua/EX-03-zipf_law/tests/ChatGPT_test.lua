@@ -99,25 +99,10 @@ local input_string = [[toward it, and then stopped.
   
   -- Tests
   local top_words = zipfs_law(input_string)
-  local expected_first_six_words = {
-    "the",
-    "i",
-    "and",
-    "it",
-    "of",
-    "was"
-  }
-  -- accept any order
-  local expected_7th8th_words = {
-    "a",
-    "in"
-  }
-  -- any order
-  local expected_9th10th_words = {
-    "that",
-    "ollie",
-    "said"
-  }
+  local expected_first_six_words = {"the", "i", "and", "it", "of", "was"}
+  local expected_7th8th_words = {"a", "in"} -- any order
+  local expected_9th10th_words = {"that", "ollie", "said"} -- any order
+  
   local first_six_words_passed = true
   local seventh_eighth_words_passed = true
   local ninth_tenth_words_passed = true
